@@ -14,7 +14,7 @@ return [
             'deleted' => 'This category has been deleted.',
 
             'error-delete' => 'The category contains tickets and can\'t be deleted.',
-        ]
+        ],
     ],
 
     'tickets' => [
@@ -28,7 +28,7 @@ return [
             'deleted' => 'This ticket has been deleted.',
             'closed' => 'This ticket has been closed.',
             'opened' => 'This ticket has been opened.',
-        ]
+        ],
     ],
 
     'comments' => [
@@ -36,6 +36,6 @@ return [
             'created' => 'The comment has been created.',
             'updated' => 'This comment has been updated.',
             'deleted' => 'This comment has been deleted.',
-        ]
+        ],
     ],
 ];

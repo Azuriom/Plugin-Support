@@ -2,7 +2,6 @@
 
 namespace Azuriom\Plugin\Support\Requests;
 
-use Azuriom\Http\Requests\Traits\ConvertCheckbox;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CategoryRequest extends FormRequest

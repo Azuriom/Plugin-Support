@@ -34,7 +34,7 @@ class TicketController extends Controller
 
         return view('support::admin.tickets.show', [
             'ticket' => $ticket,
-            'categories' => Category::all()
+            'categories' => Category::all(),
         ]);
     }
 

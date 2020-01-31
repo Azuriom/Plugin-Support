@@ -3,8 +3,6 @@
 namespace Azuriom\Plugin\Support\Models;
 
 use Azuriom\Models\Traits\HasTablePrefix;
-use Azuriom\Models\Traits\HasUser;
-use Azuriom\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
 /**

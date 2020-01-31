@@ -2,7 +2,6 @@
 
 namespace Azuriom\Plugin\Support\Requests;
 
-use Azuriom\Http\Requests\Traits\ConvertCheckbox;
 use Azuriom\Plugin\Support\Models\Category;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
