@@ -1,0 +1,14 @@
+{
+    "name": "azuriom/support",
+    "type": "azuriom-plugin",
+    "description": "Support plugin for Azuriom",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Azuriom\\Plugin\\Support\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    }
+}

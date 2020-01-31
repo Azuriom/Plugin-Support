@@ -1,0 +1,14 @@
+{
+    "name": "Support",
+    "description": "Support plugin for Azuriom",
+    "version": "0.1.0",
+    "url": "https://azuriom.com",
+    "authors": [
+        "Azuriom"
+    ],
+    "providers": [
+        "\\Azuriom\\Plugin\\Support\\Providers\\SupportServiceProvider",
+        "\\Azuriom\\Plugin\\Support\\Providers\\RouteServiceProvider"
+    ],
+	"apiId": 3
+}
