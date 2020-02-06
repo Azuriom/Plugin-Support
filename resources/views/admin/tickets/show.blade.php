@@ -8,7 +8,7 @@
              <span class="badge badge-{{ $ticket->isClosed() ? 'danger' : 'success' }}">
                  {{ $ticket->statusMessage() }}
              </span>
-            @lang('admin.tickets.status-info', ['author' => $ticket->author->name, 'category' => $ticket->category->name, 'date' => format_date($ticket->created_at)])
+            @lang('support::messages.tickets.status-info', ['author' => $ticket->author->name, 'category' => $ticket->category->name, 'date' => format_date($ticket->created_at)])
         </div>
     </div>
 
