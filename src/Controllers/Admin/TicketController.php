@@ -79,7 +79,7 @@ class TicketController extends Controller
     {
         $ticket->delete();
 
-        return redirect()->route('support::admin.tickets.index')
+        return redirect()->route('support.admin.tickets.index')
             ->with('success', trans('support::admin.tickets.status.deleted'));
     }
 }
