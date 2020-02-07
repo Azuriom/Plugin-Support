@@ -14,8 +14,10 @@ return [
         'close' => 'Close',
     ],
 
-    'open' => 'Open',
-    'closed' => 'Closed',
+    'state' => [
+        'open' => 'Open',
+        'closed' => 'Closed',
+    ],
 
     'tickets' => [
         'closed' => 'This ticket is closed.',

@@ -82,7 +82,8 @@ class TicketController extends Controller
 
         $ticket->update($request->validated());
 
-        return view('support::tickets.show', $ticket);
+        return redirect()->route('support.tickets.show', $ticket)
+            ->with('success', trans('support::admin.tickets.status.updated'));
     }
 
     /**
@@ -99,7 +100,7 @@ class TicketController extends Controller
         $ticket->closed_at = now();
         $ticket->save();
 
-        return redirect()->route('support.admin.tickets.show', $ticket)
+        return redirect()->route('support.tickets.show', $ticket)
             ->with('success', trans('support::admin.tickets.status.closed'));
     }
 }

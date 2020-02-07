@@ -22,7 +22,7 @@ class TicketCommentController extends Controller
 
         $ticket->comments()->create($request->validated());
 
-        return view('support::tickets.show', $ticket);
+        return redirect()->route('support.tickets.show', $ticket);
     }
 
     /**
@@ -40,7 +40,7 @@ class TicketCommentController extends Controller
 
         $comment->update($request->validated());
 
-        return view('support::tickets.show', $ticket);
+        return redirect()->route('support.tickets.show', $ticket);
     }
 
     /**

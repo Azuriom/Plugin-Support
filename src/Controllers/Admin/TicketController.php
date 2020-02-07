@@ -6,6 +6,7 @@ use Azuriom\Http\Controllers\Controller;
 use Azuriom\Plugin\Support\Models\Category;
 use Azuriom\Plugin\Support\Models\Ticket;
 use Azuriom\Plugin\Support\Requests\TicketRequest;
+use Illuminate\Support\Arr;
 
 class TicketController extends Controller
 {
@@ -47,7 +48,10 @@ class TicketController extends Controller
      */
     public function update(TicketRequest $request, Ticket $ticket)
     {
-        //
+        $ticket->update(Arr::except($request->validated(), 'content'));
+
+        return redirect()->route('support.admin.tickets.show', $ticket)
+            ->with('success', trans('support::admin.tickets.status.updated'));
     }
 
     public function open(Ticket $ticket)

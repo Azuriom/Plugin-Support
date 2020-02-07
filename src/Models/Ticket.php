@@ -74,7 +74,7 @@ class Ticket extends Model
 
     public function statusMessage()
     {
-        return trans('support::messages.'.($this->isClosed() ? 'closed' : 'open'));
+        return trans('support::messages.state.'.($this->isClosed() ? 'closed' : 'open'));
     }
 
     public function isClosed()
