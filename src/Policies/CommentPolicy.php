@@ -11,7 +11,7 @@ class CommentPolicy
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can view the DocDummyModel.
+     * Determine whether the user can view the comment.
      *
      * @param  \Azuriom\Models\User  $user
      * @param  \Azuriom\Plugin\Support\Models\Comment  $comment
@@ -23,7 +23,7 @@ class CommentPolicy
     }
 
     /**
-     * Determine whether the user can create DocDummyPluralModel.
+     * Determine whether the user can create comments.
      *
      * @param  \Azuriom\Models\User  $user
      * @return mixed
@@ -34,7 +34,7 @@ class CommentPolicy
     }
 
     /**
-     * Determine whether the user can update the DocDummyModel.
+     * Determine whether the user can update the comment.
      *
      * @param  \Azuriom\Models\User  $user
      * @param  \Azuriom\Plugin\Support\Models\Comment  $comment
@@ -46,7 +46,7 @@ class CommentPolicy
     }
 
     /**
-     * Determine if the given comment can be deleted by the user.
+     * Determine whether the user can delete the comment.
      *
      * @param  \Azuriom\Models\User  $user
      * @param  \Azuriom\Plugin\Support\Models\Comment  $comment

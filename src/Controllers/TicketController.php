@@ -18,7 +18,7 @@ class TicketController extends Controller
      */
     public function index()
     {
-        $tickets = Ticket::where('author_id', Auth::id())->get();
+        $tickets = Ticket::with('category')->where('author_id', Auth::id())->get();
 
         return view('support::tickets.index', [
             'tickets' => $tickets,
@@ -63,7 +63,7 @@ class TicketController extends Controller
     {
         $this->authorize('view', $ticket);
 
-        $ticket->load('comments');
+        $ticket->load(['category', 'author', 'comments.author']);
 
         return view('support::tickets.show', ['ticket' => $ticket]);
     }

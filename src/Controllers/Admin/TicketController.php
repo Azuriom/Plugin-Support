@@ -31,7 +31,7 @@ class TicketController extends Controller
      */
     public function show(Ticket $ticket)
     {
-        $ticket->load(['author', 'comments']);
+        $ticket->load(['author', 'comments.author']);
 
         return view('support::admin.tickets.show', [
             'ticket' => $ticket,

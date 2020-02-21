@@ -8,7 +8,7 @@ use Azuriom\Plugin\Support\Models\Ticket;
 class TicketPolicy
 {
     /**
-     * Determine whether the user can view the DocDummyModel.
+     * Determine whether the user can view the ticket.
      *
      * @param  \Azuriom\Models\User  $user
      * @param  \Azuriom\Plugin\Support\Models\Ticket  $ticket
@@ -20,7 +20,7 @@ class TicketPolicy
     }
 
     /**
-     * Determine whether the user can update the DocDummyModel.
+     * Determine whether the user can update the ticket.
      *
      * @param  \Azuriom\Models\User  $user
      * @param  \Azuriom\Plugin\Support\Models\Ticket  $ticket
