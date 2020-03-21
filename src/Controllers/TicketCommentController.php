@@ -32,6 +32,7 @@ class TicketCommentController extends Controller
      * @param  \Azuriom\Plugin\Support\Models\Ticket  $ticket
      * @param  \Azuriom\Plugin\Support\Models\Comment  $comment
      * @return \Illuminate\Http\Response
+     *
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function update(CommentRequest $request, Ticket $ticket, Comment $comment)
@@ -49,6 +50,7 @@ class TicketCommentController extends Controller
      * @param  \Azuriom\Plugin\Support\Models\Ticket  $ticket
      * @param  \Azuriom\Plugin\Support\Models\Comment  $comment
      * @return \Illuminate\Http\Response
+     *
      * @throws \Exception
      */
     public function destroy(Ticket $ticket, Comment $comment)

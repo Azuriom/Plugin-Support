@@ -57,6 +57,7 @@ class TicketController extends Controller
      *
      * @param  \Azuriom\Plugin\Support\Models\Ticket  $ticket
      * @return \Illuminate\Http\Response
+     *
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function show(Ticket $ticket)
@@ -74,6 +75,7 @@ class TicketController extends Controller
      * @param  \Azuriom\Plugin\Support\Requests\TicketRequest  $request
      * @param  \Azuriom\Plugin\Support\Models\Ticket  $ticket
      * @return \Illuminate\Http\Response
+     *
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function update(TicketRequest $request, Ticket $ticket)
@@ -91,6 +93,7 @@ class TicketController extends Controller
      *
      * @param  \Azuriom\Plugin\Support\Models\Ticket  $ticket
      * @return \Illuminate\Http\Response
+     *
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function close(Ticket $ticket)

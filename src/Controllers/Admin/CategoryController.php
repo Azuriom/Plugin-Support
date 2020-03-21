@@ -5,7 +5,6 @@ namespace Azuriom\Plugin\Support\Controllers\Admin;
 use Azuriom\Http\Controllers\Controller;
 use Azuriom\Plugin\Support\Models\Category;
 use Azuriom\Plugin\Support\Requests\CategoryRequest;
-use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
@@ -64,6 +63,7 @@ class CategoryController extends Controller
      *
      * @param  \Azuriom\Plugin\Support\Models\Category  $category
      * @return \Illuminate\Http\Response
+     *
      * @throws \Exception
      */
     public function destroy(Category $category)

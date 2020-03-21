@@ -22,6 +22,8 @@ return [
         'title-show' => 'Ticket #:ticket - :name',
         'title-create' => 'Create ticket',
 
+        'open-tickets' => 'Open tickets',
+
         'status' => [
             'created' => 'The ticket has been created.',
             'updated' => 'This ticket has been updated.',
@@ -37,5 +39,10 @@ return [
             'updated' => 'This comment has been updated.',
             'deleted' => 'This comment has been deleted.',
         ],
+    ],
+
+    'permissions' => [
+        'tickets' => 'View and manage support tickets',
+        'categories' => 'View and manage support categories',
     ],
 ];

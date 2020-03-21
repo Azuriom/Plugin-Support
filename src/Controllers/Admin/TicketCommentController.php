@@ -6,7 +6,6 @@ use Azuriom\Http\Controllers\Controller;
 use Azuriom\Plugin\Support\Models\Comment;
 use Azuriom\Plugin\Support\Models\Ticket;
 use Azuriom\Plugin\Support\Requests\CommentRequest;
-use Illuminate\Http\Request;
 
 class TicketCommentController extends Controller
 {
@@ -47,6 +46,7 @@ class TicketCommentController extends Controller
      * @param  \Azuriom\Plugin\Support\Models\Ticket  $ticket
      * @param  \Azuriom\Plugin\Support\Models\Comment  $comment
      * @return \Illuminate\Http\Response
+     *
      * @throws \Exception
      */
     public function destroy(Ticket $ticket, Comment $comment)

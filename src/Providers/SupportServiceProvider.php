@@ -3,10 +3,13 @@
 namespace Azuriom\Plugin\Support\Providers;
 
 use Azuriom\Extensions\Plugin\BasePluginServiceProvider;
+use Azuriom\Models\Permission;
+use Azuriom\Plugin\Support\View\Composers\SupportAdminDashboardComposer;
 use Azuriom\Plugin\Support\Models\Comment;
 use Azuriom\Plugin\Support\Models\Ticket;
 use Azuriom\Plugin\Support\Policies\CommentPolicy;
 use Azuriom\Plugin\Support\Policies\TicketPolicy;
+use Illuminate\Support\Facades\View;
 
 class SupportServiceProvider extends BasePluginServiceProvider
 {
@@ -46,7 +49,6 @@ class SupportServiceProvider extends BasePluginServiceProvider
     public function register()
     {
         $this->registerMiddlewares();
-        //
     }
 
     /**
@@ -67,7 +69,13 @@ class SupportServiceProvider extends BasePluginServiceProvider
         $this->registerRouteDescriptions();
 
         $this->registerAdminNavigation();
-        //
+
+        View::composer('admin.dashboard', SupportAdminDashboardComposer::class);
+
+        Permission::registerPermissions([
+           'support.tickets' => 'support::admin.permissions.tickets',
+           'support.categories' => 'support::admin.permissions.categories',
+        ]);
     }
 
     /**

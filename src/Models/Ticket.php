@@ -5,6 +5,7 @@ namespace Azuriom\Plugin\Support\Models;
 use Azuriom\Models\Traits\HasTablePrefix;
 use Azuriom\Models\Traits\HasUser;
 use Azuriom\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -19,6 +20,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Azuriom\Models\User $author
  * @property \Azuriom\Plugin\Support\Models\Category $category
  * @property \Illuminate\Support\Collection|\Azuriom\Plugin\Support\Models\Comment[] $comments
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder open()
  */
 class Ticket extends Model
 {
@@ -80,5 +83,16 @@ class Ticket extends Model
     public function isClosed()
     {
         return $this->closed_at !== null;
+    }
+
+    /**
+     * Scope a query to only include open tickets.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOpen(Builder $query)
+    {
+        return $query->where('closed_at', null);
     }
 }

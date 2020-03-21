@@ -30,19 +30,19 @@ class RouteServiceProvider extends BaseRouteServiceProvider
 
     protected function mapPluginsRoutes()
     {
-        Route::prefix($this->pluginName)
+        Route::prefix($this->plugin->id)
             ->middleware('web')
             ->namespace($this->namespace)
-            ->name("{$this->pluginName}.")
-            ->group(plugin_path($this->pluginName.'/routes/web.php'));
+            ->name("{$this->plugin->id}.")
+            ->group(plugin_path($this->plugin->id.'/routes/web.php'));
     }
 
     protected function mapAdminRoutes()
     {
-        Route::prefix('admin/'.$this->pluginName)
+        Route::prefix('admin/'.$this->plugin->id)
             ->middleware('admin-access')
             ->namespace($this->namespace.'\Admin')
-            ->name($this->pluginName.'.admin.')
-            ->group(plugin_path($this->pluginName.'/routes/admin.php'));
+            ->name($this->plugin->id.'.admin.')
+            ->group(plugin_path($this->plugin->id.'/routes/admin.php'));
     }
 }

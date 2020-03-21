@@ -77,6 +77,7 @@ class TicketController extends Controller
      *
      * @param  \Azuriom\Plugin\Support\Models\Ticket  $ticket
      * @return \Illuminate\Http\Response
+     *
      * @throws \Exception
      */
     public function destroy(Ticket $ticket)
