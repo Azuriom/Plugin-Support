@@ -15,7 +15,7 @@ class SupportAdminDashboardComposer extends AdminDashboardCardComposer
                 'name' => trans('support::admin.tickets.open-tickets'),
                 'value' => Ticket::open()->count(),
                 'icon' => 'fas fa-ticket-alt',
-            ]
+            ],
         ];
     }
 }
