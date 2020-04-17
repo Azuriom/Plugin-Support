@@ -93,6 +93,6 @@ class Ticket extends Model
      */
     public function scopeOpen(Builder $query)
     {
-        return $query->where('closed_at', null);
+        return $query->whereNull('closed_at');
     }
 }

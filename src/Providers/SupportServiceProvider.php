@@ -14,24 +14,6 @@ use Illuminate\Support\Facades\View;
 class SupportServiceProvider extends BasePluginServiceProvider
 {
     /**
-     * The plugin's global HTTP middleware stack.
-     *
-     * @var array
-     */
-    protected $middleware = [
-        // \Azuriom\Plugins\Example\Middleware\ExampleMiddleware::class,
-    ];
-
-    /**
-     * The plugin's route middleware groups.
-     *
-     * @var array
-     */
-    protected $middlewareGroups = [
-        // 'example' => \Azuriom\Plugins\Example\Middleware\ExampleRouteMiddleware::class,
-    ];
-
-    /**
      * The policy mappings for this plugin.
      *
      * @var array
@@ -48,7 +30,7 @@ class SupportServiceProvider extends BasePluginServiceProvider
      */
     public function register()
     {
-        $this->registerMiddlewares();
+        //
     }
 
     /**

@@ -21,7 +21,7 @@
                     @lang('messages.comments.author', ['user' => $comment->author->name, 'date' => format_date($comment->created_at, true)])
                 </div>
                 <div class="card-body media">
-                    <img class="d-flex mr-3 rounded" src="{{ game()->getAvatarUrl($comment->author, 64) }}" alt="{{ $comment->author->name }}" height="55">
+                    <img class="d-flex mr-3 rounded" src="{{ game()->getAvatarUrl($comment->author) }}" alt="{{ $comment->author->name }}" height="55">
                     <div class="media-body">
                         <div class="content-body">
                             {{ $comment->content }}
