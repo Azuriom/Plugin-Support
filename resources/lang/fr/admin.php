@@ -43,6 +43,6 @@ return [
 
     'permissions' => [
         'tickets' => 'Voir et gérer les tickets du support',
-        'categories' => 'Voir et gérer les catégories du ticket',
+        'categories' => 'Voir et gérer les catégories des tickets du support',
     ],
 ];
