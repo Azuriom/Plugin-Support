@@ -3,42 +3,45 @@
 @section('title', trans('support::admin.title'))
 
 @section('content')
-    <div class="card shadow mb-4">
-        <div class="card-header">
-            <h6 class="m-0 font-weight-bold text-primary">{{ trans('support::admin.categories.title') }}</h6>
-        </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">{{ trans('messages.fields.name') }}</th>
-                        <th scope="col">{{ trans('messages.fields.action') }}</th>
-                    </tr>
-                    </thead>
-                    <tbody>
 
-                    @foreach($categories as $category)
-                        <tr>
-                            <th scope="row">{{ $category->id }}</th>
-                            <td>{{ $category->name }}</td>
-                            <td>
-                                <a href="{{ route('support.admin.categories.edit', $category) }}" class="mx-1" title="{{ trans('messages.actions.edit') }}" data-toggle="tooltip"><i class="fas fa-edit"></i></a>
-                                <a href="{{ route('support.admin.categories.destroy', $category) }}" class="mx-1" title="{{ trans('messages.actions.delete') }}" data-toggle="tooltip" data-confirm="delete"><i class="fas fa-trash"></i></a>
-                            </td>
-                        </tr>
-                    @endforeach
-
-                    </tbody>
-                </table>
+    @can('support.categories')
+        <div class="card shadow mb-4">
+            <div class="card-header">
+                <h6 class="m-0 font-weight-bold text-primary">{{ trans('support::admin.categories.title') }}</h6>
             </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">{{ trans('messages.fields.name') }}</th>
+                            <th scope="col">{{ trans('messages.fields.action') }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
 
-            <a class="btn btn-primary" href="{{ route('support.admin.categories.create') }}">
-                <i class="fas fa-plus"></i> {{ trans('messages.actions.add') }}
-            </a>
+                        @foreach($categories as $category)
+                            <tr>
+                                <th scope="row">{{ $category->id }}</th>
+                                <td>{{ $category->name }}</td>
+                                <td>
+                                    <a href="{{ route('support.admin.categories.edit', $category) }}" class="mx-1" title="{{ trans('messages.actions.edit') }}" data-toggle="tooltip"><i class="fas fa-edit"></i></a>
+                                    <a href="{{ route('support.admin.categories.destroy', $category) }}" class="mx-1" title="{{ trans('messages.actions.delete') }}" data-toggle="tooltip" data-confirm="delete"><i class="fas fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        @endforeach
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <a class="btn btn-primary" href="{{ route('support.admin.categories.create') }}">
+                    <i class="fas fa-plus"></i> {{ trans('messages.actions.add') }}
+                </a>
+            </div>
         </div>
-    </div>
+    @endcan
 
     <div class="card shadow mb-4">
         <div class="card-header">

@@ -84,6 +84,7 @@ class SupportServiceProvider extends BasePluginServiceProvider
                 'name' => 'support::admin.title',
                 'icon' => 'fas fa-question',
                 'route' => 'support.admin.tickets.index',
+                'permission' => 'support.tickets',
             ],
         ];
     }
