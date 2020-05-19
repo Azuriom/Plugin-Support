@@ -35,9 +35,9 @@ return [
 
     'comments' => [
         'status' => [
-            'created' => 'Le commentaire a été créé.',
-            'updated' => 'Ce commentaire a été mis à jour.',
-            'deleted' => 'Ce commentaire a été supprimé.',
+            'created' => 'Une nouvelle réponse a été reçue.',
+            'updated' => 'Cette réponse a été mise à jour.',
+            'deleted' => 'Cette réponse a été supprimée.',
         ],
     ],
 
