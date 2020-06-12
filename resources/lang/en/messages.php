@@ -30,6 +30,6 @@ return [
 
     'webhook' => [
         'ticket' => 'New ticket on the support',
-        'comment' => 'New comment on the support'
+        'comment' => 'New comment on the support',
     ],
 ];
