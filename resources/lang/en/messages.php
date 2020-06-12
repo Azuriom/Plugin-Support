@@ -6,6 +6,7 @@ return [
     'fields' => [
         'subject' => 'Subject',
         'category' => 'Category',
+        'ticket' => 'Ticket',
     ],
 
     'actions' => [
@@ -25,5 +26,10 @@ return [
         'title-open' => 'Open a ticket',
 
         'status-info' => '<strong>:author</strong> created this ticket in the category <strong>:category</strong> the :date.',
+    ],
+
+    'webhook' => [
+        'ticket' => 'New ticket on the support',
+        'comment' => 'New comment on the support'
     ],
 ];

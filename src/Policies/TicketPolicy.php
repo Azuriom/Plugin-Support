@@ -16,7 +16,7 @@ class TicketPolicy
      */
     public function view(User $user, Ticket $ticket)
     {
-        return $user->id === $ticket->author_id;
+        return $user->is($ticket->author);
     }
 
     /**
@@ -28,6 +28,6 @@ class TicketPolicy
      */
     public function update(User $user, Ticket $ticket)
     {
-        return $user->id === $ticket->author_id;
+        return $user->is($ticket->author);
     }
 }

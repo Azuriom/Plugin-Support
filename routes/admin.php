@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('can:support.categories')->group(function () {
+    Route::post('/settings', 'SettingsController@update')->name('settings.update');
+
     Route::resource('categories', 'CategoryController')->except(['index', 'show']);
 });
 

@@ -6,6 +6,7 @@ return [
     'fields' => [
         'subject' => 'Sujet',
         'category' => 'Catégorie',
+        'ticket' => 'Ticket',
     ],
 
     'actions' => [

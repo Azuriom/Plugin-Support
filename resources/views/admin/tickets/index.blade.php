@@ -7,6 +7,32 @@
     @can('support.categories')
         <div class="card shadow mb-4">
             <div class="card-header">
+                <h6 class="m-0 font-weight-bold text-primary">{{ trans('support::admin.settings.title') }}</h6>
+            </div>
+            <div class="card-body">
+                <form action="{{ route('support.admin.settings.update') }}" method="POST">
+                    @csrf
+
+                    <div class="form-group">
+                        <label for="webhookInput">{{ trans('support::admin.settings.webhook') }}</label>
+                        <input type="text" class="form-control @error('webhook') is-invalid @enderror" id="webhookInput" name="webhook" placeholder="https://discordapp.com/api/webhooks/.../..." value="{{ old('webhook', setting('support.webhook')) }}" aria-describedby="webhookInfo">
+
+                        @error('webhook')
+                        <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                        @enderror
+
+                        <small id="webhookInfo" class="form-text">{{ trans('support::admin.settings.webhook-info') }}</small>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> {{ trans('messages.actions.update') }}
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="card shadow mb-4">
+            <div class="card-header">
                 <h6 class="m-0 font-weight-bold text-primary">{{ trans('support::admin.categories.title') }}</h6>
             </div>
             <div class="card-body">

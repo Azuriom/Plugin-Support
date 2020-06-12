@@ -19,7 +19,7 @@ class CommentPolicy
      */
     public function view(User $user, Comment $comment)
     {
-        return $user->id === $comment->author_id || $user->id === $comment->ticket->author_id;
+        return $user->is($comment->author) || $user->is($comment->ticket->author);
     }
 
     /**
@@ -42,7 +42,7 @@ class CommentPolicy
      */
     public function update(User $user, Comment $comment)
     {
-        return $user->id === $comment->author_id;
+        return $user->is($comment->author);
     }
 
     /**
@@ -54,6 +54,6 @@ class CommentPolicy
      */
     public function delete(User $user, Comment $comment)
     {
-        return $user->id === $comment->author_id;
+        return $user->is($comment->author);
     }
 }

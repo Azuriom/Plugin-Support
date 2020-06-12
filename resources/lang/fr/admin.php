@@ -45,4 +45,10 @@ return [
         'tickets' => 'Voir et gérer les tickets du support',
         'categories' => 'Voir et gérer les catégories des tickets du support',
     ],
+
+    'settings' => [
+        'title' => 'Paramètres du support',
+        'webhook' => 'URL de webhook Discord',
+        'webhook-info' => 'Lorsqu\'un utilisateur crée un ticket ou ajoute un commentaire, ca va créer une notification sur ce webhook. Laissez vide pour ne pas utiliser de webhook.',
+    ],
 ];

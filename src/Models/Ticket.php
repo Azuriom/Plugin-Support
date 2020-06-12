@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $subject
  * @property int $author_id
  * @property int $category_id
- * @property \Carbon\Carbon $closed_at
+ * @property \Carbon\Carbon|null $closed_at
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  *

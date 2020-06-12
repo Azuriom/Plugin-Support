@@ -2,10 +2,14 @@
 
 namespace Azuriom\Plugin\Support\Controllers;
 
+use Azuriom\Azuriom;
 use Azuriom\Http\Controllers\Controller;
 use Azuriom\Plugin\Support\Models\Comment;
 use Azuriom\Plugin\Support\Models\Ticket;
 use Azuriom\Plugin\Support\Requests\CommentRequest;
+use Azuriom\Support\Discord\DiscordWebhook;
+use Azuriom\Support\Discord\Embed;
+use Illuminate\Support\Str;
 
 class TicketCommentController extends Controller
 {
@@ -18,9 +22,27 @@ class TicketCommentController extends Controller
      */
     public function store(CommentRequest $request, Ticket $ticket)
     {
-        abort_if($request->user()->id !== $ticket->author_id, 403);
+        abort_if(! $request->user()->is($ticket->author), 403);
 
-        $ticket->comments()->create($request->validated());
+        $comment = $ticket->comments()->create($request->validated());
+
+        if (($webhookUrl = setting('support.webhook')) !== null) {
+            $user = $request->user();
+
+            $embed = Embed::create()
+                ->title(trans('support::messages.webhook.comment'))
+                ->author($user->name, game()->getAvatarUrl($user))
+                ->addField(trans('support::messages.fields.ticket'), $ticket->subject)
+                ->addField(trans('support::messages.fields.category'), $ticket->category->name)
+                ->addField(trans('messages.fields.content'), Str::limit($comment->content, 1995))
+                ->url(route('support.admin.tickets.show', $ticket))
+                ->footer('Azuriom v'.Azuriom::version())
+                ->timestamp(now());
+
+            rescue(function () use ($embed, $webhookUrl) {
+                DiscordWebhook::create()->addEmbed($embed)->send($webhookUrl);
+            });
+        }
 
         return redirect()->route('support.tickets.show', $ticket);
     }
