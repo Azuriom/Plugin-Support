@@ -22,7 +22,7 @@ class CreateSupportTicketsTable extends Migration
             $table->timestamps();
 
             $table->foreign('author_id')->references('id')->on('users');
-            $table->foreign('category_id')->references('id')->on('support_categories');
+            $table->foreign('category_id')->references('id')->on('support_categories')->onDelete('cascade');
         });
     }
 
