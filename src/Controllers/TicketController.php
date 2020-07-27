@@ -24,9 +24,7 @@ class TicketController extends Controller
     {
         $tickets = Ticket::with('category')->where('author_id', Auth::id())->get();
 
-        return view('support::tickets.index', [
-            'tickets' => $tickets,
-        ]);
+        return view('support::tickets.index', ['tickets' => $tickets]);
     }
 
     /**
@@ -36,9 +34,7 @@ class TicketController extends Controller
      */
     public function create()
     {
-        return view('support::tickets.create', [
-            'categories' => Category::all(),
-        ]);
+        return view('support::tickets.create', ['categories' => Category::all()]);
     }
 
     /**
