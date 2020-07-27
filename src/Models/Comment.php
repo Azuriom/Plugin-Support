@@ -2,6 +2,7 @@
 
 namespace Azuriom\Plugin\Support\Models;
 
+use Azuriom\Models\Traits\HasMarkdown;
 use Azuriom\Models\Traits\HasTablePrefix;
 use Azuriom\Models\Traits\HasUser;
 use Azuriom\Models\User;
@@ -21,6 +22,7 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     use HasTablePrefix;
+    use HasMarkdown;
     use HasUser;
 
     /**
@@ -60,5 +62,10 @@ class Comment extends Model
     public function author()
     {
         return $this->belongsTo(User::class, 'author_id');
+    }
+
+    public function parseContent()
+    {
+        return $this->parseMarkdown('content');
     }
 }

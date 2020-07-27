@@ -18,11 +18,11 @@
                 @lang('messages.comments.author', ['user' => $comment->author->name, 'date' => format_date($comment->created_at, true)])
             </div>
             <div class="card-body media">
-                <img class="d-flex mr-3 rounded" src="{{ game()->getAvatarUrl($comment->author) }}" alt="{{ $comment->author->name }}" height="55">
+                <img class="d-flex mr-3 rounded" src="{{ $comment->author->getAvatar() }}" alt="{{ $comment->author->name }}" height="55">
                 <div class="media-body">
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="content-body">
-                            {{ $comment->content }}
+                            {{ $comment->parseContent() }}
                         </div>
                         <a href="{{ route('support.admin.tickets.comments.destroy', [$ticket, $comment]) }}" class="btn btn-danger" title="{{ trans('messages.actions.delete') }}" data-toggle="tooltip" data-confirm="delete"><i class="fas fa-trash"></i></a>
                     </div>
