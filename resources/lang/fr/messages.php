@@ -27,4 +27,9 @@ return [
 
         'status-info' => '<strong>:author</strong> a créé ce ticket dans la catégorie <strong>:category</strong> le :date.',
     ],
+
+    'webhook' => [
+        'ticket' => 'Nouveau ticket sur le support',
+        'comment' => 'Nouvelle réponse sur le support',
+    ],
 ];

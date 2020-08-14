@@ -31,7 +31,7 @@ class TicketCommentController extends Controller
 
             $embed = Embed::create()
                 ->title(trans('support::messages.webhook.comment'))
-                ->author($user->name, game()->getAvatarUrl($user))
+                ->author($user->name, $user->getAvatar())
                 ->addField(trans('support::messages.fields.ticket'), $ticket->subject)
                 ->addField(trans('support::messages.fields.category'), $ticket->category->name)
                 ->addField(trans('messages.fields.content'), Str::limit($comment->content, 1995))
