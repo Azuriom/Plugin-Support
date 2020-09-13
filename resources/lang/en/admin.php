@@ -49,6 +49,6 @@ return [
     'settings' => [
         'title' => 'Support settings',
         'webhook' => 'Discord Webhook URL',
-        'webhook-info' => 'When an user create a ticket or add a comment it will create a notification on  this webhook. Leave empty to disable',
+        'webhook-info' => 'When an user create a ticket or add a comment it will create a notification on this webhook. Leave empty to disable',
     ],
 ];
