@@ -61,6 +61,7 @@ class TicketController extends Controller
                 ->addField(trans('support::messages.fields.category'), $ticket->category->name)
                 ->addField(trans('messages.fields.content'), Str::limit($comment->content, 1995))
                 ->url(route('support.admin.tickets.show', $ticket))
+                ->color('#004de6')
                 ->footer('Azuriom v'.Azuriom::version())
                 ->timestamp(now());
 

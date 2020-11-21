@@ -3,6 +3,7 @@
 namespace Azuriom\Plugin\Support\Controllers\Admin;
 
 use Azuriom\Http\Controllers\Controller;
+use Azuriom\Notifications\AlertNotification;
 use Azuriom\Plugin\Support\Models\Comment;
 use Azuriom\Plugin\Support\Models\Ticket;
 use Azuriom\Plugin\Support\Requests\CommentRequest;
@@ -18,7 +19,11 @@ class TicketCommentController extends Controller
      */
     public function store(CommentRequest $request, Ticket $ticket)
     {
-        $ticket->comments()->create($request->validated());
+        $comment = $ticket->comments()->create($request->validated());
+
+        (new AlertNotification(trans('support::messages.tickets.notification')))
+            ->from($comment->author)
+            ->send($ticket->author);
 
         return redirect()->route('support.admin.tickets.show', $ticket)
             ->with('success', trans('support::admin.comments.status.created'));

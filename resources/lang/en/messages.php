@@ -25,6 +25,8 @@ return [
 
         'title-open' => 'Open a ticket',
 
+        'notification' => 'New response on your support ticket.',
+
         'status-info' => '<strong>:author</strong> created this ticket in the category <strong>:category</strong> the :date.',
     ],
 

@@ -2,7 +2,7 @@
     "id": "support",
     "name": "Support",
     "description": "A support plugin that allows users to create a ticket when they needs help.",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "url": "https://azuriom.com/market/resources/3",
     "authors": [
         "Azuriom"
