@@ -124,6 +124,24 @@ class TicketController extends Controller
         $ticket->closed_at = now();
         $ticket->save();
 
+        if (($webhookUrl = setting('support.webhook')) !== null) {
+            $user = $request->user();
+
+            $embed = Embed::create()
+                ->title(trans('support::messages.webhook.closed'))
+                ->author($user->name, null, $user->getAvatar())
+                ->addField(trans('messages.fields.title'), $ticket->subject)
+                ->addField(trans('support::messages.fields.category'), $ticket->category->name)
+                ->url(route('support.admin.tickets.show', $ticket))
+                ->color('#004de6')
+                ->footer('Azuriom v'.Azuriom::version())
+                ->timestamp(now());
+
+            rescue(function () use ($embed, $webhookUrl) {
+                DiscordWebhook::create()->addEmbed($embed)->send($webhookUrl);
+            });
+        }
+
         return redirect()->route('support.tickets.show', $ticket)
             ->with('success', trans('support::admin.tickets.status.closed'));
     }

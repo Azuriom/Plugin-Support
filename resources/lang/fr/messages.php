@@ -33,5 +33,6 @@ return [
     'webhook' => [
         'ticket' => 'Nouveau ticket sur le support',
         'comment' => 'Nouvelle réponse sur le support',
+        'closed' => 'Ticket fermé',
     ],
 ];
