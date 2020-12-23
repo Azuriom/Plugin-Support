@@ -9,6 +9,7 @@ use Azuriom\Plugin\Support\Models\Ticket;
 use Azuriom\Plugin\Support\Requests\TicketRequest;
 use Azuriom\Support\Discord\DiscordWebhook;
 use Azuriom\Support\Discord\Embed;
+use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -112,12 +113,14 @@ class TicketController extends Controller
     /**
      * Update the specified resource in storage.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  \Azuriom\Plugin\Support\Models\Ticket  $ticket
      * @return \Illuminate\Http\Response
      *
      * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @throws \Illuminate\Http\Client\HttpClientException
      */
-    public function close(Ticket $ticket)
+    public function close(Request $request, Ticket $ticket)
     {
         $this->authorize('update', $ticket);
 
