@@ -8,14 +8,14 @@
              <span class="badge badge-{{ $ticket->isClosed() ? 'danger' : 'success' }}">
                  {{ $ticket->statusMessage() }}
              </span>
-            @lang('support::messages.tickets.status-info', ['author' => $ticket->author->name, 'category' => $ticket->category->name, 'date' => format_date($ticket->created_at)])
+            @lang('support::messages.tickets.status-info', ['author' => e($ticket->author->name), 'category' => e($ticket->category->name), 'date' => format_date($ticket->created_at)])
         </div>
     </div>
 
     @foreach($ticket->comments as $comment)
         <div class="card shadow-sm mb-3">
             <div class="card-header @if($ticket->author->is($comment->author)) text-primary @else text-info @endif">
-                @lang('messages.comments.author', ['user' => $comment->author->name, 'date' => format_date($comment->created_at, true)])
+                @lang('messages.comments.author', ['user' => e($comment->author->name), 'date' => format_date($comment->created_at, true)])
             </div>
             <div class="card-body media">
                 <img class="d-flex mr-3 rounded" src="{{ $comment->author->getAvatar() }}" alt="{{ $comment->author->name }}" height="55">
