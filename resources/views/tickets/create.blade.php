@@ -42,7 +42,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary">
-                <i class="fa fa-paper-plane"></i> {{ trans('messages.actions.send') }}
+                <i class="fas fa-paper-plane"></i> {{ trans('messages.actions.send') }}
             </button>
         </form>
     </div>
