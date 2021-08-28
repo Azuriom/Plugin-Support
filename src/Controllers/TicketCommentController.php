@@ -2,14 +2,10 @@
 
 namespace Azuriom\Plugin\Support\Controllers;
 
-use Azuriom\Azuriom;
 use Azuriom\Http\Controllers\Controller;
 use Azuriom\Plugin\Support\Models\Comment;
 use Azuriom\Plugin\Support\Models\Ticket;
 use Azuriom\Plugin\Support\Requests\CommentRequest;
-use Azuriom\Support\Discord\DiscordWebhook;
-use Azuriom\Support\Discord\Embed;
-use Illuminate\Support\Str;
 
 class TicketCommentController extends Controller
 {
