@@ -3,6 +3,7 @@
 namespace Azuriom\Plugin\Support\Providers;
 
 use Azuriom\Extensions\Plugin\BasePluginServiceProvider;
+use Azuriom\Models\ActionLog;
 use Azuriom\Models\Permission;
 use Azuriom\Plugin\Support\Models\Comment;
 use Azuriom\Plugin\Support\Models\Ticket;
@@ -57,6 +58,13 @@ class SupportServiceProvider extends BasePluginServiceProvider
         Permission::registerPermissions([
             'support.tickets' => 'support::admin.permissions.tickets',
             'support.categories' => 'support::admin.permissions.categories',
+        ]);
+
+        ActionLog::registerLogs('support-tickets.closed', [
+            'icon' => 'ban',
+            'color' => 'info',
+            'message' => 'support::admin.logs.tickets.closed',
+            'model' => Ticket::class,
         ]);
     }
 

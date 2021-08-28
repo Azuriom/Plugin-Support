@@ -26,24 +26,7 @@ class TicketCommentController extends Controller
 
         $comment = $ticket->comments()->create($request->validated());
 
-        if (($webhookUrl = setting('support.webhook')) !== null) {
-            $user = $request->user();
-
-            $embed = Embed::create()
-                ->title(trans('support::messages.webhook.comment'))
-                ->author($user->name, null, $user->getAvatar())
-                ->addField(trans('support::messages.fields.ticket'), $ticket->subject)
-                ->addField(trans('support::messages.fields.category'), $ticket->category->name)
-                ->addField(trans('messages.fields.content'), Str::limit($comment->content, 1995))
-                ->url(route('support.admin.tickets.show', $ticket))
-                ->color('#004de6')
-                ->footer('Azuriom v'.Azuriom::version())
-                ->timestamp(now());
-
-            rescue(function () use ($embed, $webhookUrl) {
-                DiscordWebhook::create()->addEmbed($embed)->send($webhookUrl);
-            });
-        }
+        $comment->sendWebhook();
 
         return redirect()->route('support.tickets.show', $ticket);
     }

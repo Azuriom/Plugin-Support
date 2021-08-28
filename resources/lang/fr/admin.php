@@ -51,4 +51,10 @@ return [
         'webhook' => 'URL de webhook Discord',
         'webhook-info' => 'Lorsqu\'un utilisateur crée un ticket ou ajoute un commentaire, ca va créer une notification sur ce webhook. Laissez vide pour ne pas utiliser de webhook.',
     ],
+
+    'logs' => [
+        'tickets' => [
+            'closed' => 'Fermeture du ticket #:id',
+        ],
+    ],
 ];

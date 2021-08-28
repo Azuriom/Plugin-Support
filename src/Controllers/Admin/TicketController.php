@@ -3,6 +3,7 @@
 namespace Azuriom\Plugin\Support\Controllers\Admin;
 
 use Azuriom\Http\Controllers\Controller;
+use Azuriom\Models\ActionLog;
 use Azuriom\Plugin\Support\Models\Category;
 use Azuriom\Plugin\Support\Models\Ticket;
 use Azuriom\Plugin\Support\Requests\TicketRequest;
@@ -65,6 +66,8 @@ class TicketController extends Controller
     {
         $ticket->closed_at = now();
         $ticket->save();
+
+        ActionLog::log('support-tickets.closed', $ticket);
 
         return redirect()->route('support.admin.tickets.show', $ticket)
             ->with('success', trans('support::admin.tickets.status.closed'));

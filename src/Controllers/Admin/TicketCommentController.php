@@ -25,6 +25,8 @@ class TicketCommentController extends Controller
             ->from($comment->author)
             ->send($ticket->author);
 
+        $comment->sendWebhook();
+
         return redirect()->route('support.admin.tickets.show', $ticket)
             ->with('success', trans('support::admin.comments.status.created'));
     }

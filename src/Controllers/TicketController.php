@@ -4,6 +4,7 @@ namespace Azuriom\Plugin\Support\Controllers;
 
 use Azuriom\Azuriom;
 use Azuriom\Http\Controllers\Controller;
+use Azuriom\Models\ActionLog;
 use Azuriom\Plugin\Support\Models\Category;
 use Azuriom\Plugin\Support\Models\Ticket;
 use Azuriom\Plugin\Support\Requests\TicketRequest;
@@ -126,6 +127,8 @@ class TicketController extends Controller
 
         $ticket->closed_at = now();
         $ticket->save();
+
+        ActionLog::log('support-tickets.closed', $ticket);
 
         if (($webhookUrl = setting('support.webhook')) !== null) {
             $user = $request->user();
