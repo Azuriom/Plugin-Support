@@ -20,8 +20,8 @@ class CreateSupportCommentsTable extends Migration
             $table->unsignedInteger('ticket_id');
             $table->timestamps();
 
-            $table->foreign('author_id')->references('id')->on('users');
-            $table->foreign('ticket_id')->references('id')->on('support_tickets')->onDelete('cascade');
+            $table->foreign('author_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreign('ticket_id')->references('id')->on('support_tickets')->cascadeOnDelete();
         });
     }
 

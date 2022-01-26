@@ -16,7 +16,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon|null $closed_at
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- *
  * @property \Azuriom\Models\User $author
  * @property \Azuriom\Plugin\Support\Models\Category $category
  * @property \Illuminate\Support\Collection|\Azuriom\Plugin\Support\Models\Comment[] $comments

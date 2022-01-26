@@ -6,6 +6,7 @@ use Azuriom\Http\Controllers\Controller;
 use Azuriom\Notifications\AlertNotification;
 use Azuriom\Plugin\Support\Models\Comment;
 use Azuriom\Plugin\Support\Models\Ticket;
+use Azuriom\Plugin\Support\Notifications\TicketCommented;
 use Azuriom\Plugin\Support\Requests\CommentRequest;
 
 class TicketCommentController extends Controller
@@ -19,6 +20,7 @@ class TicketCommentController extends Controller
      */
     public function store(CommentRequest $request, Ticket $ticket)
     {
+        /** @var \Azuriom\Plugin\Support\Models\Comment $comment */
         $comment = $ticket->comments()->create($request->validated());
 
         (new AlertNotification(trans('support::messages.tickets.notification')))
@@ -26,6 +28,8 @@ class TicketCommentController extends Controller
             ->send($ticket->author);
 
         $comment->sendWebhook();
+
+        $ticket->author->notify(new TicketCommented($comment));
 
         return redirect()->route('support.admin.tickets.show', $ticket)
             ->with('success', trans('support::admin.comments.status.created'));

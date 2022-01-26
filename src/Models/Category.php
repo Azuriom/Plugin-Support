@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $name
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- *
  * @property \Illuminate\Support\Collection|\Azuriom\Plugin\Support\Models\Ticket[] $tickets
  */
 class Category extends Model

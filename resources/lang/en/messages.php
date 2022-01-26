@@ -35,4 +35,12 @@ return [
         'comment' => 'New comment on the support',
         'closed' => 'Ticket closed',
     ],
+
+    'mails' => [
+        'comment' => [
+            'subject' => 'New reply on your support ticket',
+            'message' => 'Hello :user, your support ticket #:id got a new reply from :author.',
+            'view' => 'View the ticket',
+        ],
+    ],
 ];

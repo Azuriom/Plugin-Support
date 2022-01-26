@@ -19,7 +19,6 @@ use Illuminate\Support\Str;
  * @property int $ticket_id
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- *
  * @property \Azuriom\Models\User $author
  * @property \Azuriom\Plugin\Support\Models\Ticket $ticket
  */

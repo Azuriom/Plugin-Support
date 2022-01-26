@@ -35,4 +35,12 @@ return [
         'comment' => 'Nouvelle réponse sur le support',
         'closed' => 'Ticket fermé',
     ],
+
+    'mails' => [
+        'comment' => [
+            'subject' => 'Nouvelle réponse sur votre ticket sur le support',
+            'message' => 'Bonjour :user, votre ticket support #:id a reçu une nouvelle réponse de :author.',
+            'view' => 'Voir le ticket',
+        ],
+    ],
 ];

@@ -18,8 +18,10 @@ class TicketController extends Controller
      */
     public function index()
     {
+        $tickets = Ticket::with(['category', 'author'])->latest('updated_at')->paginate();
+
         return view('support::admin.tickets.index', [
-            'tickets' => Ticket::with(['category', 'author'])->paginate(),
+            'tickets' => $tickets,
             'categories' => Category::all(),
         ]);
     }

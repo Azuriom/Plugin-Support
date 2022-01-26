@@ -21,8 +21,8 @@ class CreateSupportTicketsTable extends Migration
             $table->timestamp('closed_at')->nullable();
             $table->timestamps();
 
-            $table->foreign('author_id')->references('id')->on('users');
-            $table->foreign('category_id')->references('id')->on('support_categories')->onDelete('cascade');
+            $table->foreign('author_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreign('category_id')->references('id')->on('support_categories')->cascadeOnDelete();
         });
     }
 
