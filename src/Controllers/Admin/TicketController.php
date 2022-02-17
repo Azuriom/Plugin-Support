@@ -52,7 +52,7 @@ class TicketController extends Controller
         $ticket->update(Arr::except($request->validated(), 'content'));
 
         return redirect()->route('support.admin.tickets.show', $ticket)
-            ->with('success', trans('support::admin.tickets.status.updated'));
+            ->with('success', trans('messages.status.success'));
     }
 
     public function open(Ticket $ticket)
@@ -61,7 +61,7 @@ class TicketController extends Controller
         $ticket->save();
 
         return redirect()->route('support.admin.tickets.show', $ticket)
-            ->with('success', trans('support::admin.tickets.status.opened'));
+            ->with('success', trans('messages.status.success'));
     }
 
     public function close(Ticket $ticket)
@@ -72,7 +72,7 @@ class TicketController extends Controller
         ActionLog::log('support-tickets.closed', $ticket);
 
         return redirect()->route('support.admin.tickets.show', $ticket)
-            ->with('success', trans('support::admin.tickets.status.closed'));
+            ->with('success', trans('messages.status.success'));
     }
 
     /**
@@ -88,6 +88,6 @@ class TicketController extends Controller
         $ticket->delete();
 
         return redirect()->route('support.admin.tickets.index')
-            ->with('success', trans('support::admin.tickets.status.deleted'));
+            ->with('success', trans('messages.status.success'));
     }
 }

@@ -7,10 +7,11 @@ return [
         'subject' => 'Sujet',
         'category' => 'Catégorie',
         'ticket' => 'Ticket',
+        'comment' => 'Commentaire',
     ],
 
     'actions' => [
-        'open-new' => 'Ouvrir un nouveau ticket',
+        'create' => 'Ouvrir un nouveau ticket',
         'reopen' => 'Réouvrir',
         'close' => 'Fermer',
     ],
@@ -23,11 +24,11 @@ return [
     'tickets' => [
         'closed' => 'Ce ticket est fermé.',
 
-        'title-open' => 'Ouvrir un ticket',
+        'open' => 'Ouvrir un ticket',
 
         'notification' => 'Nouvelle réponse sur votre ticket dans le support.',
 
-        'status-info' => '<strong>:author</strong> a créé ce ticket dans la catégorie <strong>:category</strong> le :date.',
+        'info' => '<strong>:author</strong> a créé ce ticket dans la catégorie <strong>:category</strong> le :date.',
     ],
 
     'webhook' => [

@@ -76,7 +76,7 @@ class SupportServiceProvider extends BasePluginServiceProvider
     protected function routeDescriptions()
     {
         return [
-            'support.tickets.index' => 'support::messages.title',
+            'support.tickets.index' => trans('support::messages.title'),
         ];
     }
 
@@ -89,7 +89,7 @@ class SupportServiceProvider extends BasePluginServiceProvider
     {
         return [
             'support' => [
-                'name' => 'support::admin.title',
+                'name' => trans('support::admin.title'),
                 'icon' => 'fas fa-question',
                 'route' => 'support.admin.tickets.index',
                 'permission' => 'support.tickets',

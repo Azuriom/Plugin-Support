@@ -12,7 +12,7 @@ class SupportAdminDashboardComposer extends AdminDashboardCardComposer
         return [
             'vote_sites' => [
                 'color' => 'warning',
-                'name' => trans('support::admin.tickets.open-tickets'),
+                'name' => trans('support::admin.tickets.open'),
                 'value' => Ticket::open()->count(),
                 'icon' => 'fas fa-ticket-alt',
             ],

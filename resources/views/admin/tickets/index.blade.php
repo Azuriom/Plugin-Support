@@ -7,21 +7,23 @@
     @can('support.categories')
         <div class="card shadow mb-4">
             <div class="card-header">
-                <h6 class="m-0 font-weight-bold text-primary">{{ trans('support::admin.settings.title') }}</h6>
+                <h5 class="card-title mb-0">
+                    {{ trans('support::admin.settings.title') }}
+                </h5>
             </div>
             <div class="card-body">
                 <form action="{{ route('support.admin.settings.update') }}" method="POST">
                     @csrf
 
-                    <div class="form-group">
-                        <label for="webhookInput">{{ trans('support::admin.settings.webhook') }}</label>
+                    <div class="mb-3">
+                        <label class="form-label" for="webhookInput">{{ trans('support::admin.settings.webhook') }}</label>
                         <input type="text" class="form-control @error('webhook') is-invalid @enderror" id="webhookInput" name="webhook" placeholder="https://discord.com/api/webhooks/.../..." value="{{ old('webhook', setting('support.webhook')) }}" aria-describedby="webhookInfo">
 
                         @error('webhook')
                         <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                         @enderror
 
-                        <small id="webhookInfo" class="form-text">{{ trans('support::admin.settings.webhook-info') }}</small>
+                        <small id="webhookInfo" class="form-text">{{ trans('support::admin.settings.webhook_info') }}</small>
                     </div>
 
                     <button type="submit" class="btn btn-primary">
@@ -33,7 +35,9 @@
 
         <div class="card shadow mb-4">
             <div class="card-header">
-                <h6 class="m-0 font-weight-bold text-primary">{{ trans('support::admin.categories.title') }}</h6>
+                <h5 class="card-title mb-0">
+                    {{ trans('support::admin.categories.title') }}
+                </h5>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -71,7 +75,9 @@
 
     <div class="card shadow mb-4">
         <div class="card-header">
-            <h6 class="m-0 font-weight-bold text-primary">{{ trans('support::admin.tickets.title') }}</h6>
+            <h5 class="card-title mb-0">
+                {{ trans('support::admin.tickets.title') }}
+            </h5>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -95,7 +101,7 @@
                             <td>{{ $ticket->subject }}</td>
                             <td>{{ $ticket->author->name }}</td>
                             <td>
-                                <span class="badge badge-{{ $ticket->isClosed() ? 'danger' : 'success' }}">
+                                <span class="badge bg-{{ $ticket->isClosed() ? 'danger' : 'success' }}">
                                     {{ $ticket->statusMessage() }}
                                 </span>
                             </td>

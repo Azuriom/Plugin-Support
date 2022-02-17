@@ -26,7 +26,7 @@
                     </td>
                     <td>{{ $ticket->category->name }}</td>
                     <td>
-                        <span class="badge badge-{{ $ticket->isClosed() ? 'danger' : 'success' }}">
+                        <span class="badge bg-{{ $ticket->isClosed() ? 'danger' : 'success' }}">
                             {{ $ticket->statusMessage() }}
                         </span>
                     </td>
@@ -38,7 +38,7 @@
         </table>
 
         <a href="{{ route('support.tickets.create') }}" class="btn btn-success">
-            {{ trans('support::messages.actions.open-new') }}
+            {{ trans('support::messages.actions.create') }}
         </a>
     </div>
 @endsection

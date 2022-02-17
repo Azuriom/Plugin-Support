@@ -1,6 +1,6 @@
 @extends('admin.layouts.admin')
 
-@section('title', trans('support::admin.categories.title-edit', ['category' => $category->id]))
+@section('title', trans('support::admin.categories.edit', ['category' => $category->id]))
 
 @section('content')
     <div class="card shadow mb-4">

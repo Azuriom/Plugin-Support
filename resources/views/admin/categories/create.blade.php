@@ -1,6 +1,6 @@
 @extends('admin.layouts.admin')
 
-@section('title', trans('support::admin.categories.title-create'))
+@section('title', trans('support::admin.categories.create'))
 
 @section('content')
     <div class="card shadow mb-4">
