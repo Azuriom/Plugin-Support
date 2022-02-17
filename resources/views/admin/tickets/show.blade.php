@@ -24,7 +24,7 @@
                         <div class="content-body">
                             {{ $comment->parseContent() }}
                         </div>
-                        <a href="{{ route('support.admin.tickets.comments.destroy', [$ticket, $comment]) }}" class="btn btn-danger" title="{{ trans('messages.actions.delete') }}" data-toggle="tooltip" data-confirm="delete">
+                        <a href="{{ route('support.admin.tickets.comments.destroy', [$ticket, $comment]) }}" class="btn btn-danger" title="{{ trans('messages.actions.delete') }}" data-bs-toggle="tooltip" data-confirm="delete">
                             <i class="fas fa-trash"></i>
                         </a>
                     </div>
