@@ -19,7 +19,7 @@ class SupportServiceProvider extends BasePluginServiceProvider
      *
      * @var array
      */
-    protected $policies = [
+    protected array $policies = [
         Ticket::class => TicketPolicy::class,
         Comment::class => CommentPolicy::class,
     ];
