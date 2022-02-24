@@ -8,7 +8,7 @@
     <div class="card">
         <div class="card-body">
             <table class="table">
-                <thead>
+                <thead class="table-dark">
                 <tr>
                     <th scope="col">{{ trans('support::messages.fields.subject') }}</th>
                     <th scope="col">{{ trans('support::messages.fields.category') }}</th>

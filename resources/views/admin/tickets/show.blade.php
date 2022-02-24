@@ -2,6 +2,8 @@
 
 @section('title', trans('support::admin.tickets.show', ['ticket' => $ticket->id, 'name' => $ticket->subject]))
 
+@include('elements.markdown-editor')
+
 @section('content')
     <div class="card shadow-sm mb-3">
         <div class="card-body">
@@ -18,7 +20,9 @@
                 @lang('messages.comments.author', ['user' => e($comment->author->name), 'date' => format_date($comment->created_at, true)])
             </div>
             <div class="card-body d-flex">
-                <img class="flex-shrink-0 me-3 rounded" src="{{ $comment->author->getAvatar() }}" alt="{{ $comment->author->name }}" height="55">
+                <div class="flex-shrink-0">
+                    <img class="me-3 rounded" src="{{ $comment->author->getAvatar() }}" alt="{{ $comment->author->name }}" height="55">
+                </div>
                 <div class="flex-grow-1">
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="content-body">
@@ -55,7 +59,7 @@
 
                     <div class="mb-3">
                         <label class="form-label" for="content">{{ trans('support::messages.fields.comment') }}</label>
-                        <textarea class="form-control @error('content') is-invalid @enderror" id="content" name="content" rows="4" required>{{ old('content') }}</textarea>
+                        <textarea class="form-control markdown-editor @error('content') is-invalid @enderror" id="content" name="content" rows="4">{{ old('content') }}</textarea>
                     </div>
 
                     @error('content')

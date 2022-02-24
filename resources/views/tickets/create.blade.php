@@ -2,9 +2,11 @@
 
 @section('title', trans('support::messages.tickets.open'))
 
+@include('elements.markdown-editor')
+
 @section('content')
     <div class="row justify-content-center">
-        <div class="col-lg-8">
+        <div class="col-lg-10">
             <h1>{{ trans('support::messages.tickets.open') }}</h1>
 
             <div class="card">
@@ -37,7 +39,7 @@
 
                         <div class="mb-3">
                             <label class="form-label" for="contentInput">{{ trans('messages.fields.content') }}</label>
-                            <textarea class="form-control @error('content') is-invalid @enderror" id="contentInput" name="content" rows="5" required>{{ old('content', $category->content ?? '') }}</textarea>
+                            <textarea class="form-control markdown-editor @error('content') is-invalid @enderror" id="contentInput" name="content" rows="5">{{ old('content', $category->content ?? '') }}</textarea>
 
                             @error('content')
                             <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>

@@ -2,6 +2,8 @@
 
 @section('title', $ticket->subject)
 
+@include('elements.markdown-editor')
+
 @section('content')
     <h1>{{ $ticket->subject }}</h1>
 
@@ -17,7 +19,9 @@
     @foreach($ticket->comments as $comment)
         <div class="card mb-3">
             <div class="card-body d-flex">
-                <img class="flex-shrink-0 me-3 rounded" src="{{ $comment->author->getAvatar() }}" alt="{{ $comment->author->name }}" height="55">
+                <div class="flex-shrink-0">
+                    <img class="me-3 rounded" src="{{ $comment->author->getAvatar() }}" alt="{{ $comment->author->name }}" height="55">
+                </div>
                 <div class="flex-grow-1">
                     <div class="content-body">
                         <p class="mb-1 small">
@@ -43,7 +47,7 @@
 
                     <div class="mb-3">
                         <label class="form-label" for="content">{{ trans('support::messages.fields.comment') }}</label>
-                        <textarea class="form-control @error('content') is-invalid @enderror" id="content" name="content" rows="4" required>{{ old('content') }}</textarea>
+                        <textarea class="form-control markdown-editor @error('content') is-invalid @enderror" id="content" name="content" rows="4">{{ old('content') }}</textarea>
                     </div>
 
                     @error('content')
