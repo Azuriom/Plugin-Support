@@ -37,7 +37,7 @@
 
     @if($ticket->isClosed())
         <div class="alert alert-info">
-            <i class="fas fa-info-circle"></i> {{ trans('support::messages.tickets.closed') }}
+            <i class="bi bi-info-circle"></i> {{ trans('support::messages.tickets.closed') }}
         </div>
     @else
         <div class="card mb-3">
@@ -55,7 +55,7 @@
                     @enderror
 
                     <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-comment"></i> {{ trans('messages.actions.comment') }}
+                        <i class="bi bi-chat"></i> {{ trans('messages.actions.comment') }}
                     </button>
                 </form>
 
@@ -63,7 +63,7 @@
                     @csrf
 
                     <button type="submit" class="btn btn-danger">
-                        <i class="fas fa-ban"></i> {{ trans('support::messages.actions.close') }}
+                        <i class="bi bi-x-lg"></i> {{ trans('support::messages.actions.close') }}
                     </button>
                 </form>
             </div>

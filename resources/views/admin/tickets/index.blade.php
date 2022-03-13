@@ -27,7 +27,7 @@
                     </div>
 
                     <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-save"></i> {{ trans('messages.actions.update') }}
+                        <i class="bi bi-save"></i> {{ trans('messages.actions.update') }}
                     </button>
                 </form>
             </div>
@@ -56,8 +56,8 @@
                                 <th scope="row">{{ $category->id }}</th>
                                 <td>{{ $category->name }}</td>
                                 <td>
-                                    <a href="{{ route('support.admin.categories.edit', $category) }}" class="mx-1" title="{{ trans('messages.actions.edit') }}" data-bs-toggle="tooltip"><i class="fas fa-edit"></i></a>
-                                    <a href="{{ route('support.admin.categories.destroy', $category) }}" class="mx-1" title="{{ trans('messages.actions.delete') }}" data-bs-toggle="tooltip" data-confirm="delete"><i class="fas fa-trash"></i></a>
+                                    <a href="{{ route('support.admin.categories.edit', $category) }}" class="mx-1" title="{{ trans('messages.actions.edit') }}" data-bs-toggle="tooltip"><i class="bi bi-pencil-square"></i></a>
+                                    <a href="{{ route('support.admin.categories.destroy', $category) }}" class="mx-1" title="{{ trans('messages.actions.delete') }}" data-bs-toggle="tooltip" data-confirm="delete"><i class="bi bi-trash"></i></a>
                                 </td>
                             </tr>
                         @endforeach
@@ -67,7 +67,7 @@
                 </div>
 
                 <a class="btn btn-primary" href="{{ route('support.admin.categories.create') }}">
-                    <i class="fas fa-plus"></i> {{ trans('messages.actions.add') }}
+                    <i class="bi bi-plus-lg"></i> {{ trans('messages.actions.add') }}
                 </a>
             </div>
         </div>
@@ -108,9 +108,9 @@
                             <td>{{ $ticket->category->name }}</td>
                             <td>{{ format_date_compact($ticket->created_at) }}</td>
                             <td>
-                                <a href="{{ route('support.admin.tickets.show', $ticket) }}" class="mx-1" title="{{ trans('messages.actions.show') }}" data-bs-toggle="tooltip"><i class="fas fa-eye"></i></a>
+                                <a href="{{ route('support.admin.tickets.show', $ticket) }}" class="mx-1" title="{{ trans('messages.actions.show') }}" data-bs-toggle="tooltip"><i class="bi bi-eye"></i></a>
                                 @if($ticket->isClosed())
-                                    <a href="{{ route('support.admin.tickets.destroy', $ticket) }}" class="mx-1" title="{{ trans('messages.actions.delete') }}" data-bs-toggle="tooltip" data-confirm="delete"><i class="fas fa-trash"></i></a>
+                                    <a href="{{ route('support.admin.tickets.destroy', $ticket) }}" class="mx-1" title="{{ trans('messages.actions.delete') }}" data-bs-toggle="tooltip" data-confirm="delete"><i class="bi bi-trash"></i></a>
                                 @endif
                             </td>
                         </tr>

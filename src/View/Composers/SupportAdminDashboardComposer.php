@@ -14,7 +14,7 @@ class SupportAdminDashboardComposer extends AdminDashboardCardComposer
                 'color' => 'warning',
                 'name' => trans('support::admin.tickets.open'),
                 'value' => Ticket::open()->count(),
-                'icon' => 'fas fa-ticket-alt',
+                'icon' => 'bi bi-ticket',
             ],
         ];
     }

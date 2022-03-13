@@ -29,7 +29,7 @@
                             {{ $comment->parseContent() }}
                         </div>
                         <a href="{{ route('support.admin.tickets.comments.destroy', [$ticket, $comment]) }}" class="btn btn-danger" title="{{ trans('messages.actions.delete') }}" data-bs-toggle="tooltip" data-confirm="delete">
-                            <i class="fas fa-trash"></i>
+                            <i class="bi bi-trash"></i>
                         </a>
                     </div>
                 </div>
@@ -41,17 +41,17 @@
         <div class="card-body">
             @if($ticket->isClosed())
                 <p class="text-danger">
-                    <i class="fas fa-ban"></i> {{ trans('support::messages.tickets.closed') }}
+                    <i class="bi bi-x-lg"></i> {{ trans('support::messages.tickets.closed') }}
                 </p>
 
                 <form action="{{ route('support.admin.tickets.open', $ticket) }}" method="POST">
                     @csrf
 
                     <button type="submit" class="btn btn-success">
-                        <i class="fas fa-check"></i> {{ trans('support::messages.actions.reopen') }}
+                        <i class="bi bi-check-lg"></i> {{ trans('support::messages.actions.reopen') }}
                     </button>
 
-                    <a href="{{ route('support.admin.tickets.destroy', $ticket) }}" class="btn btn-danger" data-confirm="delete"><i class="fas fa-trash"></i> {{ trans('messages.actions.delete') }}</a>
+                    <a href="{{ route('support.admin.tickets.destroy', $ticket) }}" class="btn btn-danger" data-confirm="delete"><i class="bi bi-trash"></i> {{ trans('messages.actions.delete') }}</a>
                 </form>
             @else
                 <form action="{{ route('support.admin.tickets.comments.store', $ticket) }}" method="POST" class="mb-2">
@@ -67,7 +67,7 @@
                     @enderror
 
                     <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-comment"></i> {{ trans('messages.actions.comment') }}
+                        <i class="bi bi-chat"></i> {{ trans('messages.actions.comment') }}
                     </button>
                 </form>
 
@@ -75,7 +75,7 @@
                     @csrf
 
                     <button type="submit" class="btn btn-danger">
-                        <i class="fas fa-ban"></i> {{ trans('support::messages.actions.close') }}
+                        <i class="bi bi-x-lg"></i> {{ trans('support::messages.actions.close') }}
                     </button>
                 </form>
             @endif

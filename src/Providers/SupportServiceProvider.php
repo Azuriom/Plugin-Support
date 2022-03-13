@@ -90,7 +90,7 @@ class SupportServiceProvider extends BasePluginServiceProvider
         return [
             'support' => [
                 'name' => trans('support::admin.title'),
-                'icon' => 'fas fa-question',
+                'icon' => 'bi bi-question-circle',
                 'route' => 'support.admin.tickets.index',
                 'permission' => 'support.tickets',
             ],

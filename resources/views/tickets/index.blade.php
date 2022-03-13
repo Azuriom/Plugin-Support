@@ -36,8 +36,8 @@
                 </tbody>
             </table>
 
-            <a href="{{ route('support.tickets.create') }}" class="btn btn-success">
-                <i class="fas fa-plus"></i> {{ trans('support::messages.actions.create') }}
+            <a href="{{ route('support.tickets.create') }}" class="btn btn-primary">
+                <i class="bi bi-plus-lg"></i> {{ trans('support::messages.actions.create') }}
             </a>
         </div>
     </div>
