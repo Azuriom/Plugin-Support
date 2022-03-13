@@ -29,7 +29,7 @@ class CategoryController extends Controller
         Category::create($request->validated());
 
         return redirect()->route('support.admin.tickets.index')
-            ->with('success', trans('support::admin.categories.status.created'));
+            ->with('success', trans('messages.status.success'));
     }
 
     /**
@@ -55,7 +55,7 @@ class CategoryController extends Controller
         $category->update($request->validated());
 
         return redirect()->route('support.admin.tickets.index')
-            ->with('success', trans('support::admin.categories.status.updated'));
+            ->with('success', trans('messages.status.success'));
     }
 
     /**
@@ -70,12 +70,12 @@ class CategoryController extends Controller
     {
         if (! $category->tickets->isEmpty()) {
             return redirect()->route('support.admin.tickets.index')
-                ->with('error', trans('support::admin.categories.status.error-delete'));
+                ->with('error', trans('support::admin.categories.delete_empty'));
         }
 
         $category->delete();
 
         return redirect()->route('support.admin.tickets.index')
-            ->with('success', trans('support::admin.categories.status.deleted'));
+            ->with('success', trans('messages.status.success'));
     }
 }

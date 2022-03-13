@@ -149,6 +149,6 @@ class TicketController extends Controller
         }
 
         return redirect()->route('support.tickets.show', $ticket)
-            ->with('success', trans('support::admin.tickets.status.closed'));
+            ->with('success', trans('messages.status.success'));
     }
 }

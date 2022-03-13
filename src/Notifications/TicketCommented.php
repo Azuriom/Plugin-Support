@@ -8,10 +8,7 @@ use Illuminate\Notifications\Notification;
 
 class TicketCommented extends Notification
 {
-    /**
-     * @var \Azuriom\Plugin\Support\Models\Comment
-     */
-    protected $comment;
+    protected Comment $comment;
 
     /**
      * Create a new notification instance.

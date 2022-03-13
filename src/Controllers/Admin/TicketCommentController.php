@@ -32,7 +32,7 @@ class TicketCommentController extends Controller
         $ticket->author->notify(new TicketCommented($comment));
 
         return redirect()->route('support.admin.tickets.show', $ticket)
-            ->with('success', trans('support::admin.comments.status.created'));
+            ->with('success', trans('messages.status.success'));
     }
 
     /**
@@ -48,7 +48,7 @@ class TicketCommentController extends Controller
         $comment->update($request->validated());
 
         return redirect()->route('support.admin.tickets.show', $ticket)
-            ->with('success', trans('support::admin.comments.status.updated'));
+            ->with('success', trans('messages.status.success'));
     }
 
     /**
@@ -65,6 +65,6 @@ class TicketCommentController extends Controller
         $comment->delete();
 
         return redirect()->route('support.admin.tickets.show', $ticket)
-            ->with('success', trans('support::admin.comments.status.deleted'));
+            ->with('success', trans('messages.status.success'));
     }
 }

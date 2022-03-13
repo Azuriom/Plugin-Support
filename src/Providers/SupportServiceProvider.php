@@ -19,7 +19,7 @@ class SupportServiceProvider extends BasePluginServiceProvider
      *
      * @var array
      */
-    protected $policies = [
+    protected array $policies = [
         Ticket::class => TicketPolicy::class,
         Comment::class => CommentPolicy::class,
     ];
@@ -76,7 +76,7 @@ class SupportServiceProvider extends BasePluginServiceProvider
     protected function routeDescriptions()
     {
         return [
-            'support.tickets.index' => 'support::messages.title',
+            'support.tickets.index' => trans('support::messages.title'),
         ];
     }
 
@@ -89,8 +89,8 @@ class SupportServiceProvider extends BasePluginServiceProvider
     {
         return [
             'support' => [
-                'name' => 'support::admin.title',
-                'icon' => 'fas fa-question',
+                'name' => trans('support::admin.title'),
+                'icon' => 'bi bi-question-circle',
                 'route' => 'support.admin.tickets.index',
                 'permission' => 'support.tickets',
             ],
