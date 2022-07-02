@@ -36,7 +36,10 @@ class TicketController extends Controller
      */
     public function create()
     {
-        return view('support::tickets.create', ['categories' => Category::all()]);
+        return view('support::tickets.create', [
+            'categories' => Category::all(),
+            'pendingId' => old('pending_id', Str::uuid()),
+        ]);
     }
 
     /**
@@ -52,6 +55,8 @@ class TicketController extends Controller
         $ticket = Ticket::create(Arr::except($request->validated(), 'content'));
 
         $comment = $ticket->comments()->create(Arr::only($request->validated(), 'content'));
+
+        $comment->persistPendingAttachments($request->input('pending_id'));
 
         if (($webhookUrl = setting('support.webhook')) !== null) {
             $user = $request->user();
@@ -89,7 +94,10 @@ class TicketController extends Controller
 
         $ticket->load(['category', 'author', 'comments.author']);
 
-        return view('support::tickets.show', ['ticket' => $ticket]);
+        return view('support::tickets.show', [
+            'ticket' => $ticket,
+            'pendingId' => old('pending_id', Str::uuid()),
+        ]);
     }
 
     /**

@@ -2,7 +2,9 @@
 
 @section('title', trans('support::admin.tickets.show', ['ticket' => $ticket->id, 'name' => $ticket->subject]))
 
-@include('elements.markdown-editor')
+@include('elements.markdown-editor', [
+    'imagesUploadUrl' => route('support.admin.comments.attachments.pending', $pendingId),
+])
 
 @section('content')
     <div class="card shadow-sm mb-3">
@@ -56,6 +58,8 @@
             @else
                 <form action="{{ route('support.admin.tickets.comments.store', $ticket) }}" method="POST" class="mb-2">
                     @csrf
+
+                    <input type="hidden" name="pending_id" value="{{ $pendingId }}">
 
                     <div class="mb-3">
                         <label class="form-label" for="content">{{ trans('support::messages.fields.comment') }}</label>

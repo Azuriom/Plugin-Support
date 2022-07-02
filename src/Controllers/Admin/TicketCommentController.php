@@ -23,6 +23,8 @@ class TicketCommentController extends Controller
         /** @var \Azuriom\Plugin\Support\Models\Comment $comment */
         $comment = $ticket->comments()->create($request->validated());
 
+        $comment->persistPendingAttachments($request->input('pending_id'));
+
         (new AlertNotification(trans('support::messages.tickets.notification')))
             ->from($comment->author)
             ->send($ticket->author);

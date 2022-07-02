@@ -8,6 +8,7 @@ use Azuriom\Plugin\Support\Models\Category;
 use Azuriom\Plugin\Support\Models\Ticket;
 use Azuriom\Plugin\Support\Requests\TicketRequest;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 class TicketController extends Controller
 {
@@ -37,6 +38,7 @@ class TicketController extends Controller
         return view('support::admin.tickets.show', [
             'ticket' => $ticket->load(['author', 'comments.author']),
             'categories' => Category::all(),
+            'pendingId' => old('pending_id', Str::uuid()),
         ]);
     }
 

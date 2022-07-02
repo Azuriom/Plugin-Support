@@ -10,6 +10,7 @@ use Azuriom\Plugin\Support\Models\Ticket;
 use Azuriom\Plugin\Support\Policies\CommentPolicy;
 use Azuriom\Plugin\Support\Policies\TicketPolicy;
 use Azuriom\Plugin\Support\View\Composers\SupportAdminDashboardComposer;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\View;
 
 class SupportServiceProvider extends BasePluginServiceProvider
@@ -66,6 +67,8 @@ class SupportServiceProvider extends BasePluginServiceProvider
             'message' => 'support::admin.logs.tickets.closed',
             'model' => Ticket::class,
         ]);
+
+        Relation::morphMap(['support.comments' => Comment::class]);
     }
 
     /**

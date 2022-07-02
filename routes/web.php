@@ -1,5 +1,6 @@
 <?php
 
+use Azuriom\Plugin\Support\Controllers\CommentAttachmentController;
 use Azuriom\Plugin\Support\Controllers\TicketCommentController;
 use Azuriom\Plugin\Support\Controllers\TicketController;
 use Illuminate\Support\Facades\Route;
@@ -20,4 +21,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/{ticket}/close', [TicketController::class, 'close'])->name('tickets.close');
     Route::resource('tickets', TicketController::class)->except(['edit', 'destroy']);
     Route::resource('tickets.comments', TicketCommentController::class)->only(['store', 'update', 'destroy']);
+    Route::post('comments/attachments/{pendingId}', [CommentAttachmentController::class, 'pending'])
+        ->name('comments.attachments.pending');
 });

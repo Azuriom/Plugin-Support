@@ -3,6 +3,7 @@
 namespace Azuriom\Plugin\Support\Models;
 
 use Azuriom\Azuriom;
+use Azuriom\Models\Traits\Attachable;
 use Azuriom\Models\Traits\HasMarkdown;
 use Azuriom\Models\Traits\HasTablePrefix;
 use Azuriom\Models\Traits\HasUser;
@@ -24,8 +25,9 @@ use Illuminate\Support\Str;
  */
 class Comment extends Model
 {
-    use HasTablePrefix;
+    use Attachable;
     use HasMarkdown;
+    use HasTablePrefix;
     use HasUser;
 
     /**

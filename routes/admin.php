@@ -1,6 +1,7 @@
 <?php
 
 use Azuriom\Plugin\Support\Controllers\Admin\CategoryController;
+use Azuriom\Plugin\Support\Controllers\Admin\CommentAttachmentController;
 use Azuriom\Plugin\Support\Controllers\Admin\SettingsController;
 use Azuriom\Plugin\Support\Controllers\Admin\TicketCommentController;
 use Azuriom\Plugin\Support\Controllers\Admin\TicketController;
@@ -18,4 +19,6 @@ Route::middleware('can:support.tickets')->group(function () {
     Route::resource('tickets', TicketController::class)->except(['edit', 'create', 'store']);
 
     Route::resource('tickets.comments', TicketCommentController::class)->only(['store', 'update', 'destroy']);
+    Route::post('comments/attachments/{pendingId}', [CommentAttachmentController::class, 'pending'])
+        ->name('comments.attachments.pending');
 });

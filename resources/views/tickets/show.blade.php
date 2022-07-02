@@ -2,7 +2,9 @@
 
 @section('title', $ticket->subject)
 
-@include('elements.markdown-editor')
+@include('elements.markdown-editor', [
+    'imagesUploadUrl' => route('support.comments.attachments.pending', $pendingId),
+])
 
 @section('content')
     <h1>{{ $ticket->subject }}</h1>
@@ -44,6 +46,8 @@
             <div class="card-body">
                 <form action="{{ route('support.tickets.comments.store', $ticket) }}" method="POST" class="mb-2">
                     @csrf
+
+                    <input type="hidden" name="pending_id" value="{{ $pendingId }}">
 
                     <div class="mb-3">
                         <label class="form-label" for="content">{{ trans('support::messages.fields.comment') }}</label>

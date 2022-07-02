@@ -22,6 +22,8 @@ class TicketCommentController extends Controller
 
         $comment = $ticket->comments()->create($request->validated());
 
+        $comment->persistPendingAttachments($request->input('pending_id'));
+
         $comment->sendWebhook();
 
         return redirect()->route('support.tickets.show', $ticket);
