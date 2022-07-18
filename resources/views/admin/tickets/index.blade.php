@@ -73,13 +73,26 @@
         </div>
     @endcan
 
-    <div class="card shadow mb-4">
+    <div class="card shadow mb-4" id="tickets">
         <div class="card-header">
             <h5 class="card-title mb-0">
                 {{ trans('support::admin.tickets.title') }}
             </h5>
         </div>
         <div class="card-body">
+            <ul class="nav nav-pills" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link @if(!$closed) active @endif" href="{{ route('support.admin.tickets.index') }}#tickets" role="tab">
+                        {{ trans('support::messages.state.open') }}
+                    </a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link @if($closed) active @endif" href="{{ route('support.admin.tickets.index') }}?closed#tickets" role="tab">
+                        {{ trans('support::messages.state.closed') }}
+                    </a>
+                </li>
+            </ul>
+
             <div class="table-responsive">
                 <table class="table">
                     <thead>
@@ -120,7 +133,7 @@
                 </table>
             </div>
 
-            {{ $tickets->links() }}
+            {{ $tickets->withQueryString()->links() }}
         </div>
     </div>
 @endsection

@@ -7,6 +7,8 @@ use Azuriom\Models\ActionLog;
 use Azuriom\Plugin\Support\Models\Category;
 use Azuriom\Plugin\Support\Models\Ticket;
 use Azuriom\Plugin\Support\Requests\TicketRequest;
+use Illuminate\Contracts\Database\Query\Builder;
+use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
@@ -15,13 +17,22 @@ class TicketController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tickets = Ticket::with(['category', 'author'])->latest('updated_at')->paginate();
+        $closed = $request->has('closed');
+        $tickets = Ticket::with(['category', 'author'])
+            ->tap(fn(Builder $query) => $closed
+                ? $query->whereNotNull('closed_at')
+                : $query->whereNull('closed_at')
+            )
+            ->latest('updated_at')
+            ->paginate();
 
         return view('support::admin.tickets.index', [
+            'closed' => $closed,
             'tickets' => $tickets,
             'categories' => Category::all(),
         ]);
