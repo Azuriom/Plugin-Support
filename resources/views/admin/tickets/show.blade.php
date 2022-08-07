@@ -23,17 +23,15 @@
             </div>
             <div class="card-body d-flex">
                 <div class="flex-shrink-0">
-                    <img class="me-3 rounded" src="{{ $comment->author->getAvatar() }}" alt="{{ $comment->author->name }}" height="55">
+                    <img class="me-3 rounded" src="{{ $comment->author->getAvatar() }}" alt="{{ $comment->author->name }}" width="55">
                 </div>
                 <div class="flex-grow-1">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="content-body">
-                            {{ $comment->parseContent() }}
-                        </div>
-                        <a href="{{ route('support.admin.tickets.comments.destroy', [$ticket, $comment]) }}" class="btn btn-danger" title="{{ trans('messages.actions.delete') }}" data-bs-toggle="tooltip" data-confirm="delete">
-                            <i class="bi bi-trash"></i>
-                        </a>
+                    <div class="content-body">
+                        {{ $comment->parseContent() }}
                     </div>
+                    <a href="{{ route('support.admin.tickets.comments.destroy', [$ticket, $comment]) }}" class="btn btn-danger" title="{{ trans('messages.actions.delete') }}" data-bs-toggle="tooltip" data-confirm="delete">
+                        <i class="bi bi-trash"></i>
+                    </a>
                 </div>
             </div>
         </div>
