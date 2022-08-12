@@ -8,6 +8,8 @@ return [
         'category' => 'Category',
         'ticket' => 'Ticket',
         'comment' => 'Comment',
+        'status' => 'Status',
+        'Date' => 'Date',
     ],
 
     'actions' => [
