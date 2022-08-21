@@ -8,7 +8,7 @@ return [
         'edit' => '编辑类别 #:category',
         'create' => '创建类别',
 
-	'delete_empty' => '此类别下存在工单，还不能被删除.',
+        'delete_empty' => '此类别下存在工单，还不能被删除.',
     ],
 
     'tickets' => [

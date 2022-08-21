@@ -7,7 +7,7 @@ return [
         'subject' => '主题',
         'category' => '类别',
         'ticket' => '工单',
-	'comment' => '评论',
+        'comment' => '评论',
     ],
 
     'actions' => [
