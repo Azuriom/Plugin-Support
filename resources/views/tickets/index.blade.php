@@ -5,7 +5,7 @@
 @section('content')
     <h1>{{ trans('support::messages.title') }}</h1>
 
-    <div class="card">
+    <div class="card" id="support">
         <div class="card-body">
             <table class="table">
                 <thead class="table-dark">

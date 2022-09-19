@@ -26,7 +26,7 @@
                 </div>
                 <div class="flex-grow-1">
                     <div class="content-body">
-                        <p class="mb-1 small">
+                        <p class="mb-1 small text-muted">
                             @lang('messages.comments.author', ['user' => e($comment->author->name), 'date' => format_date($comment->created_at, true)])
                         </p>
 

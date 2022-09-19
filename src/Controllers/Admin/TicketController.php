@@ -24,7 +24,7 @@ class TicketController extends Controller
     {
         $closed = $request->has('closed');
         $tickets = Ticket::with(['category', 'author'])
-            ->tap(fn(Builder $query) => $closed
+            ->tap(fn (Builder $query) => $closed
                 ? $query->whereNotNull('closed_at')
                 : $query->whereNull('closed_at')
             )
