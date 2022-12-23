@@ -29,7 +29,7 @@ class TicketCommentController extends Controller
             ->from($comment->author)
             ->send($ticket->author);
 
-        $comment->sendWebhook();
+        $comment->sendDiscordWebhook();
 
         $ticket->author->notify(new TicketCommented($comment));
 

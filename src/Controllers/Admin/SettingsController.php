@@ -23,6 +23,7 @@ class SettingsController extends Controller
         ]);
 
         Setting::updateSettings([
+            'support.home' => $request->input('home_message'),
             'support.webhook' => $request->input('webhook'),
         ]);
 

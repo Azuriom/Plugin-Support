@@ -4,6 +4,7 @@
 
 @include('elements.markdown-editor', [
     'imagesUploadUrl' => route('support.comments.attachments.pending', $pendingId),
+    'autosaveId' => 'support_ticket',
 ])
 
 @section('content')

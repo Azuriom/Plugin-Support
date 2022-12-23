@@ -74,7 +74,7 @@ class Comment extends Model
         return $this->parseMarkdown('content');
     }
 
-    public function sendWebhook()
+    public function sendDiscordWebhook()
     {
         if (($webhookUrl = setting('support.webhook')) === null) {
             return;
@@ -90,9 +90,8 @@ class Comment extends Model
             ->color('#004de6')
             ->footer('Azuriom v'.Azuriom::version())
             ->timestamp(now());
+        $webhook = DiscordWebhook::create()->addEmbed($embed);
 
-        rescue(function () use ($embed, $webhookUrl) {
-            DiscordWebhook::create()->addEmbed($embed)->send($webhookUrl);
-        });
+        rescue(fn () => $webhook->send($webhookUrl));
     }
 }

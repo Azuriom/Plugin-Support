@@ -5,6 +5,14 @@
 @section('content')
     <h1>{{ trans('support::messages.title') }}</h1>
 
+    @if($infoText !== null)
+        <div class="card mb-4">
+            <div class="card-body pb-0">
+                {{ $infoText }}
+            </div>
+        </div>
+    @endif
+
     <div class="card" id="support">
         <div class="card-body">
             <table class="table">

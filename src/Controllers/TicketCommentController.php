@@ -24,7 +24,7 @@ class TicketCommentController extends Controller
 
         $comment->persistPendingAttachments($request->input('pending_id'));
 
-        $comment->sendWebhook();
+        $comment->sendDiscordWebhook();
 
         return redirect()->route('support.tickets.show', $ticket);
     }

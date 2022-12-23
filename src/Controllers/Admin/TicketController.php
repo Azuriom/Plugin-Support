@@ -34,6 +34,7 @@ class TicketController extends Controller
         return view('support::admin.tickets.index', [
             'closed' => $closed,
             'tickets' => $tickets,
+            'homeMessage' => setting('support.home', ''),
             'categories' => Category::all(),
         ]);
     }

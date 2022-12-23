@@ -26,6 +26,7 @@ return [
 
     'settings' => [
         'title' => 'Paramètres du support',
+        'home_message' => 'Message de la page d\'accueil',
         'webhook' => 'URL de webhook Discord',
         'webhook_info' => 'Lorsqu\'un utilisateur crée un ticket ou ajoute un commentaire, ca va créer une notification sur ce webhook. Laissez vide pour ne pas utiliser de webhook.',
     ],

@@ -26,6 +26,7 @@ return [
 
     'settings' => [
         'title' => 'Support settings',
+        'home_message' => 'Home message',
         'webhook' => 'Discord Webhook URL',
         'webhook_info' => 'When an user create a ticket or add a comment it will create a notification on this webhook. Leave empty to disable',
     ],

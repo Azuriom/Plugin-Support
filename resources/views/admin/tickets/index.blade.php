@@ -1,78 +1,10 @@
 @extends('admin.layouts.admin')
 
+@include('admin.elements.editor')
+
 @section('title', trans('support::admin.title'))
 
 @section('content')
-
-    @can('support.categories')
-        <div class="card shadow mb-4">
-            <div class="card-header">
-                <h5 class="card-title mb-0">
-                    {{ trans('support::admin.settings.title') }}
-                </h5>
-            </div>
-            <div class="card-body">
-                <form action="{{ route('support.admin.settings.update') }}" method="POST">
-                    @csrf
-
-                    <div class="mb-3">
-                        <label class="form-label" for="webhookInput">{{ trans('support::admin.settings.webhook') }}</label>
-                        <input type="text" class="form-control @error('webhook') is-invalid @enderror" id="webhookInput" name="webhook" placeholder="https://discord.com/api/webhooks/.../..." value="{{ old('webhook', setting('support.webhook')) }}" aria-describedby="webhookInfo">
-
-                        @error('webhook')
-                        <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                        @enderror
-
-                        <small id="webhookInfo" class="form-text">{{ trans('support::admin.settings.webhook_info') }}</small>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">
-                        <i class="bi bi-save"></i> {{ trans('messages.actions.update') }}
-                    </button>
-                </form>
-            </div>
-        </div>
-
-        <div class="card shadow mb-4">
-            <div class="card-header">
-                <h5 class="card-title mb-0">
-                    {{ trans('support::admin.categories.title') }}
-                </h5>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">{{ trans('messages.fields.name') }}</th>
-                            <th scope="col">{{ trans('messages.fields.action') }}</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-
-                        @foreach($categories as $category)
-                            <tr>
-                                <th scope="row">{{ $category->id }}</th>
-                                <td>{{ $category->name }}</td>
-                                <td>
-                                    <a href="{{ route('support.admin.categories.edit', $category) }}" class="mx-1" title="{{ trans('messages.actions.edit') }}" data-bs-toggle="tooltip"><i class="bi bi-pencil-square"></i></a>
-                                    <a href="{{ route('support.admin.categories.destroy', $category) }}" class="mx-1" title="{{ trans('messages.actions.delete') }}" data-bs-toggle="tooltip" data-confirm="delete"><i class="bi bi-trash"></i></a>
-                                </td>
-                            </tr>
-                        @endforeach
-
-                        </tbody>
-                    </table>
-                </div>
-
-                <a class="btn btn-primary" href="{{ route('support.admin.categories.create') }}">
-                    <i class="bi bi-plus-lg"></i> {{ trans('messages.actions.add') }}
-                </a>
-            </div>
-        </div>
-    @endcan
-
     <div class="card shadow mb-4" id="tickets">
         <div class="card-header">
             <h5 class="card-title mb-0">
@@ -136,4 +68,82 @@
             {{ $tickets->withQueryString()->links() }}
         </div>
     </div>
+
+    @can('support.categories')
+        <div class="card shadow mb-4">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    {{ trans('support::admin.settings.title') }}
+                </h5>
+            </div>
+            <div class="card-body">
+                <form action="{{ route('support.admin.settings.update') }}" method="POST">
+                    @csrf
+
+                    <div class="mb-3">
+                        <label class="form-label" for="homeMessage">{{ trans('support::admin.settings.home_message') }}</label>
+                        <textarea class="form-control html-editor @error('home_message') is-invalid @enderror" id="homeMessage" name="home_message" rows="5">{{ old('home_message', $homeMessage) }}</textarea>
+
+                        @error('home_message')
+                        <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="webhookInput">{{ trans('support::admin.settings.webhook') }}</label>
+                        <input type="text" class="form-control @error('webhook') is-invalid @enderror" id="webhookInput" name="webhook" placeholder="https://discord.com/api/webhooks/.../..." value="{{ old('webhook', setting('support.webhook')) }}" aria-describedby="webhookInfo">
+
+                        @error('webhook')
+                        <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                        @enderror
+
+                        <small id="webhookInfo" class="form-text">{{ trans('support::admin.settings.webhook_info') }}</small>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-save"></i> {{ trans('messages.actions.update') }}
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="card shadow mb-4">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    {{ trans('support::admin.categories.title') }}
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">{{ trans('messages.fields.name') }}</th>
+                            <th scope="col">{{ trans('messages.fields.action') }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        @foreach($categories as $category)
+                            <tr>
+                                <th scope="row">{{ $category->id }}</th>
+                                <td>{{ $category->name }}</td>
+                                <td>
+                                    <a href="{{ route('support.admin.categories.edit', $category) }}" class="mx-1" title="{{ trans('messages.actions.edit') }}" data-bs-toggle="tooltip"><i class="bi bi-pencil-square"></i></a>
+                                    <a href="{{ route('support.admin.categories.destroy', $category) }}" class="mx-1" title="{{ trans('messages.actions.delete') }}" data-bs-toggle="tooltip" data-confirm="delete"><i class="bi bi-trash"></i></a>
+                                </td>
+                            </tr>
+                        @endforeach
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <a class="btn btn-primary" href="{{ route('support.admin.categories.create') }}">
+                    <i class="bi bi-plus-lg"></i> {{ trans('messages.actions.add') }}
+                </a>
+            </div>
+        </div>
+    @endcan
 @endsection

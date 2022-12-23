@@ -2,17 +2,15 @@
 
 namespace Azuriom\Plugin\Support\Controllers;
 
-use Azuriom\Azuriom;
 use Azuriom\Http\Controllers\Controller;
 use Azuriom\Models\ActionLog;
 use Azuriom\Plugin\Support\Models\Category;
 use Azuriom\Plugin\Support\Models\Ticket;
 use Azuriom\Plugin\Support\Requests\TicketRequest;
-use Azuriom\Support\Discord\DiscordWebhook;
-use Azuriom\Support\Discord\Embed;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\HtmlString;
 use Illuminate\Support\Str;
 
 class TicketController extends Controller
@@ -25,8 +23,12 @@ class TicketController extends Controller
     public function index()
     {
         $tickets = Ticket::with('category')->where('author_id', Auth::id())->get();
+        $infoText = setting('support.home');
 
-        return view('support::tickets.index', ['tickets' => $tickets]);
+        return view('support::tickets.index', [
+            'infoText' => $infoText !== null ? new HtmlString($infoText) : null,
+            'tickets' => $tickets,
+        ]);
     }
 
     /**
@@ -59,22 +61,9 @@ class TicketController extends Controller
         $comment->persistPendingAttachments($request->input('pending_id'));
 
         if (($webhookUrl = setting('support.webhook')) !== null) {
-            $user = $request->user();
+            $webhook = $ticket->createCreatedDiscordWebhook();
 
-            $embed = Embed::create()
-                ->title(trans('support::messages.webhook.ticket'))
-                ->author($user->name, null, $user->getAvatar())
-                ->addField(trans('messages.fields.title'), $ticket->subject)
-                ->addField(trans('support::messages.fields.category'), $ticket->category->name)
-                ->addField(trans('messages.fields.content'), Str::limit($comment->content, 1995))
-                ->url(route('support.admin.tickets.show', $ticket))
-                ->color('#004de6')
-                ->footer('Azuriom v'.Azuriom::version())
-                ->timestamp(now());
-
-            rescue(function () use ($embed, $webhookUrl) {
-                DiscordWebhook::create()->addEmbed($embed)->send($webhookUrl);
-            });
+            rescue(fn () => $webhook->send($webhookUrl));
         }
 
         return redirect()->route('support.tickets.show', $ticket);
@@ -139,21 +128,9 @@ class TicketController extends Controller
         ActionLog::log('support-tickets.closed', $ticket);
 
         if (($webhookUrl = setting('support.webhook')) !== null) {
-            $user = $request->user();
+            $webhook = $ticket->createClosedDiscordWebhook($request->user());
 
-            $embed = Embed::create()
-                ->title(trans('support::messages.webhook.closed'))
-                ->author($user->name, null, $user->getAvatar())
-                ->addField(trans('messages.fields.title'), $ticket->subject)
-                ->addField(trans('support::messages.fields.category'), $ticket->category->name)
-                ->url(route('support.admin.tickets.show', $ticket))
-                ->color('#004de6')
-                ->footer('Azuriom v'.Azuriom::version())
-                ->timestamp(now());
-
-            rescue(function () use ($embed, $webhookUrl) {
-                DiscordWebhook::create()->addEmbed($embed)->send($webhookUrl);
-            });
+            rescue(fn () => $webhook->send($webhookUrl));
         }
 
         return redirect()->route('support.tickets.show', $ticket)

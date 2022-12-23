@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::redirect('/', '/support/tickets');
+
 Route::middleware('auth')->group(function () {
     Route::post('/{ticket}/close', [TicketController::class, 'close'])->name('tickets.close');
     Route::resource('tickets', TicketController::class)->except(['edit', 'destroy']);

@@ -2,11 +2,15 @@
 
 namespace Azuriom\Plugin\Support\Models;
 
+use Azuriom\Azuriom;
 use Azuriom\Models\Traits\HasTablePrefix;
 use Azuriom\Models\Traits\HasUser;
 use Azuriom\Models\User;
+use Azuriom\Support\Discord\DiscordWebhook;
+use Azuriom\Support\Discord\Embed;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 /**
  * @property int $id
@@ -82,6 +86,39 @@ class Ticket extends Model
     public function isClosed()
     {
         return $this->closed_at !== null;
+    }
+
+    public function createCreatedDiscordWebhook()
+    {
+        $comment = $this->comments()->first();
+
+        $embed = Embed::create()
+            ->title(trans('support::messages.webhook.ticket'))
+            ->author($this->author->name, null, $this->author->getAvatar())
+            ->addField(trans('messages.fields.title'), $this->subject)
+            ->addField(trans('support::messages.fields.category'), $this->category->name)
+            ->addField(trans('messages.fields.content'), Str::limit($comment->content, 1995))
+            ->url(route('support.admin.tickets.show', $this))
+            ->color('#004de6')
+            ->footer('Azuriom v'.Azuriom::version())
+            ->timestamp(now());
+
+        return DiscordWebhook::create()->addEmbed($embed);
+    }
+
+    public function createClosedDiscordWebhook(User $user)
+    {
+        $embed = Embed::create()
+            ->title(trans('support::messages.webhook.closed'))
+            ->author($this->a->name, null, $user->getAvatar())
+            ->addField(trans('messages.fields.title'), $this->subject)
+            ->addField(trans('support::messages.fields.category'), $this->category->name)
+            ->url(route('support.admin.tickets.show', $this))
+            ->color('#004de6')
+            ->footer('Azuriom v'.Azuriom::version())
+            ->timestamp(now());
+
+        return DiscordWebhook::create()->addEmbed($embed);
     }
 
     /**
