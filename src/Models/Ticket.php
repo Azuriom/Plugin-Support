@@ -110,7 +110,7 @@ class Ticket extends Model
     {
         $embed = Embed::create()
             ->title(trans('support::messages.webhook.closed'))
-            ->author($this->a->name, null, $user->getAvatar())
+            ->author($user->name, null, $user->getAvatar())
             ->addField(trans('messages.fields.title'), $this->subject)
             ->addField(trans('support::messages.fields.category'), $this->category->name)
             ->url(route('support.admin.tickets.show', $this))
