@@ -19,6 +19,7 @@ return [
     'state' => [
         'open' => 'Ouvert',
         'closed' => 'Fermé',
+        'replied' => 'Répondu',
     ],
 
     'tickets' => [
@@ -44,4 +45,6 @@ return [
             'view' => 'Voir le ticket',
         ],
     ],
+
+    'days' => 'jours',
 ];

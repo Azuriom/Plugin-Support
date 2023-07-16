@@ -47,8 +47,8 @@
                 <form action="{{ route('support.admin.tickets.open', $ticket) }}" method="POST">
                     @csrf
 
-                    <button type="submit" class="btn btn-success">
-                        <i class="bi bi-check-lg"></i> {{ trans('support::messages.actions.reopen') }}
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-arrow-repeat"></i> {{ trans('support::messages.actions.reopen') }}
                     </button>
 
                     <a href="{{ route('support.admin.tickets.destroy', $ticket) }}" class="btn btn-danger" data-confirm="delete"><i class="bi bi-trash"></i> {{ trans('messages.actions.delete') }}</a>

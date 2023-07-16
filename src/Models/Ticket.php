@@ -22,6 +22,7 @@ use Illuminate\Support\Str;
  * @property \Carbon\Carbon $updated_at
  * @property \Azuriom\Models\User $author
  * @property \Azuriom\Plugin\Support\Models\Category $category
+ * @property \Azuriom\Plugin\Support\Models\Comment $comment
  * @property \Illuminate\Support\Collection|\Azuriom\Plugin\Support\Models\Comment[] $comments
  *
  * @method static \Illuminate\Database\Eloquent\Builder open()
@@ -71,11 +72,24 @@ class Ticket extends Model
     }
 
     /**
+     * Get the latest comment of this ticket.
+     */
+    public function comment()
+    {
+        return $this->hasOne(Comment::class)->latest();
+    }
+
+    /**
      * Get the comments of this ticket.
      */
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function userReplied()
+    {
+        return $this->comment->author->is($this->author);
     }
 
     public function statusMessage()

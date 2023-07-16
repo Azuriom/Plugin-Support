@@ -42,6 +42,16 @@
         <div class="alert alert-info">
             <i class="bi bi-info-circle"></i> {{ trans('support::messages.tickets.closed') }}
         </div>
+
+        @if($canReopen)
+            <form action="{{ route('support.tickets.open', $ticket) }}" method="POST">
+                @csrf
+
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-arrow-repeat"></i> {{ trans('support::messages.actions.reopen') }}
+                </button>
+            </form>
+        @endif
     @else
         <div class="card mb-3">
             <div class="card-body">

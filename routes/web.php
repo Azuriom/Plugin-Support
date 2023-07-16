@@ -21,6 +21,7 @@ Route::redirect('/', '/support/tickets');
 
 Route::middleware('auth')->group(function () {
     Route::post('/{ticket}/close', [TicketController::class, 'close'])->name('tickets.close');
+    Route::post('/{ticket}/open', [TicketController::class, 'open'])->name('tickets.open');
     Route::resource('tickets', TicketController::class)->except(['edit', 'destroy']);
     Route::resource('tickets.comments', TicketCommentController::class)->only(['store', 'update', 'destroy']);
     Route::post('comments/attachments/{pendingId}', [CommentAttachmentController::class, 'pending'])

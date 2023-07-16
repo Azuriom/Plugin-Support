@@ -28,10 +28,12 @@ class TicketController extends Controller
                 ? $query->whereNotNull('closed_at')
                 : $query->whereNull('closed_at')
             )
+            ->with('comment.author')
             ->latest('updated_at')
             ->paginate();
 
         return view('support::admin.tickets.index', [
+            'scheduler' => function_exists('scheduler_running') && scheduler_running(),
             'closed' => $closed,
             'tickets' => $tickets,
             'homeMessage' => setting('support.home', ''),

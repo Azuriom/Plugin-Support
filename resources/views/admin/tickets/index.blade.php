@@ -46,9 +46,15 @@
                             <td>{{ $ticket->subject }}</td>
                             <td>{{ $ticket->author->name }}</td>
                             <td>
-                                <span class="badge bg-{{ $ticket->isClosed() ? 'danger' : 'success' }}">
-                                    {{ $ticket->statusMessage() }}
-                                </span>
+                                @if($ticket->isClosed() || ! $ticket->userReplied())
+                                    <span class="badge bg-{{ $ticket->isClosed() ? 'danger' : 'success' }}">
+                                        {{ $ticket->statusMessage() }}
+                                    </span>
+                                @else
+                                    <span class="badge bg-primary">
+                                        {{ trans('support::messages.state.replied') }}
+                                    </span>
+                                @endif
                             </td>
                             <td>{{ $ticket->category->name }}</td>
                             <td>{{ format_date_compact($ticket->created_at) }}</td>
@@ -82,9 +88,9 @@
 
                     <div class="mb-3">
                         <label class="form-label" for="homeMessage">{{ trans('support::admin.settings.home_message') }}</label>
-                        <textarea class="form-control html-editor @error('home_message') is-invalid @enderror" id="homeMessage" name="home_message" rows="5">{{ old('home_message', $homeMessage) }}</textarea>
+                        <textarea class="form-control html-editor @error('home') is-invalid @enderror" id="homeMessage" name="home" rows="5">{{ old('home_message', $homeMessage) }}</textarea>
 
-                        @error('home_message')
+                        @error('home')
                         <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                         @enderror
                     </div>
@@ -97,7 +103,37 @@
                         <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                         @enderror
 
-                        <small id="webhookInfo" class="form-text">{{ trans('support::admin.settings.webhook_info') }}</small>
+                        <small id="webhookInfo" class="form-text">
+                            {{ trans('support::admin.settings.webhook_info') }}
+                        </small>
+                    </div>
+
+                    @if($scheduler)
+                        <div class="mb-3">
+                            <label class="form-label" for="autoCloseInput">{{ trans('support::admin.settings.auto_close') }}</label>
+
+                            <div class="input-group">
+                                <input type="number" min="1" class="form-control @error('close_after_days') is-invalid @enderror" id="autoCloseInput" name="close_after_days"  value="{{ old('close_after_days', setting('support.close_after_days')) }}" aria-describedby="autoCloseInfo">
+                                <span class="input-group-text">{{ trans('support::messages.days') }}</span>
+                            </div>
+
+                            @error('close_after_days')
+                            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                            @enderror
+
+                            <small id="autoCloseInfo" class="form-text">
+                                {{ trans('support::admin.settings.webhook_info') }}
+                            </small>
+                        </div>
+                    @else
+                        <div class="alert alert-info">
+                            <i class="bi bi-info-circle"></i> @lang('support::admin.settings.scheduler')
+                        </div>
+                    @endif
+
+                    <div class="mb-3 form-check form-switch">
+                        <input type="checkbox" class="form-check-input" id="reopenSwitch" name="reopen" @checked(setting('support.reopen'))>
+                        <label class="form-check-label" for="reopenSwitch">{{ trans('support::admin.settings.reopen') }}</label>
                     </div>
 
                     <button type="submit" class="btn btn-primary">

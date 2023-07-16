@@ -2,14 +2,18 @@
 
 namespace Azuriom\Plugin\Support\Providers;
 
+use Azuriom\Extensions\Plugin\AdminUserEditComposer;
 use Azuriom\Extensions\Plugin\BasePluginServiceProvider;
 use Azuriom\Models\ActionLog;
 use Azuriom\Models\Permission;
+use Azuriom\Plugin\Support\Commands\CloseStaleTickets;
 use Azuriom\Plugin\Support\Models\Comment;
 use Azuriom\Plugin\Support\Models\Ticket;
 use Azuriom\Plugin\Support\Policies\CommentPolicy;
 use Azuriom\Plugin\Support\Policies\TicketPolicy;
 use Azuriom\Plugin\Support\View\Composers\SupportAdminDashboardComposer;
+use Azuriom\Plugin\Support\View\Composers\SupportAdminUserComposer;
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\View;
 
@@ -68,7 +72,35 @@ class SupportServiceProvider extends BasePluginServiceProvider
             'model' => Ticket::class,
         ]);
 
+        ActionLog::registerLogs('support-tickets.reopened', [
+            'icon' => 'arrow-repeat',
+            'color' => 'info',
+            'message' => 'support::admin.logs.tickets.reopened',
+            'model' => Ticket::class,
+        ]);
+
         Relation::morphMap(['support.comments' => Comment::class]);
+
+        $this->commands(CloseStaleTickets::class);
+
+        if (method_exists($this, 'registerSchedule')) {
+            $this->registerSchedule();
+        }
+
+        if (class_exists(AdminUserEditComposer::class)) {
+            View::composer('admin.users.edit', SupportAdminUserComposer::class);
+        }
+    }
+
+    /**
+     * Define the application's command schedule.
+     *
+     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
+     * @return void
+     */
+    protected function schedule(Schedule $schedule)
+    {
+        $schedule->command('support:close-stale')->daily();
     }
 
     /**

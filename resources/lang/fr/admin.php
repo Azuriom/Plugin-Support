@@ -29,10 +29,15 @@ return [
         'home_message' => 'Message de la page d\'accueil',
         'webhook' => 'URL de webhook Discord',
         'webhook_info' => 'Lorsqu\'un utilisateur crée un ticket ou ajoute un commentaire, ca va créer une notification sur ce webhook. Laissez vide pour ne pas utiliser de webhook.',
+        'scheduler' => 'Lorsque les tâches CRON sont configurées, les tickets peuvent être automatiquement fermés après un certain temps.',
+        'auto_close' => 'Délai avant de fermer les tickets automatiquement',
+        'auto_close_info' => 'Lorsqu\'un ticket ne reçoit pas de réponse pendant ce temps, il sera automatiquement fermé. Laissez vide pour désactiver.',
+        'reopen' => 'Autoriser les utilisateurs à réouvrir un ticket fermé.',
     ],
 
     'logs' => [
         'tickets' => [
+            'reopened' => 'Réouverture du ticket #:id',
             'closed' => 'Fermeture du ticket #:id',
         ],
     ],

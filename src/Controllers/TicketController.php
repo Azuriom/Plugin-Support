@@ -86,6 +86,7 @@ class TicketController extends Controller
         return view('support::tickets.show', [
             'ticket' => $ticket,
             'pendingId' => old('pending_id', Str::uuid()),
+            'canReopen' => setting('support.reopen', false),
         ]);
     }
 
@@ -108,16 +109,6 @@ class TicketController extends Controller
             ->with('success', trans('support::admin.tickets.status.updated'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Azuriom\Plugin\Support\Models\Ticket  $ticket
-     * @return \Illuminate\Http\Response
-     *
-     * @throws \Illuminate\Auth\Access\AuthorizationException
-     * @throws \Illuminate\Http\Client\HttpClientException
-     */
     public function close(Request $request, Ticket $ticket)
     {
         $this->authorize('update', $ticket);
@@ -132,6 +123,21 @@ class TicketController extends Controller
 
             rescue(fn () => $webhook->send($webhookUrl));
         }
+
+        return redirect()->route('support.tickets.show', $ticket)
+            ->with('success', trans('messages.status.success'));
+    }
+
+    public function open(Request $request, Ticket $ticket)
+    {
+        abort_if(! setting('support.reopen', false), 404);
+
+        $this->authorize('update', $ticket);
+
+        $ticket->closed_at = null;
+        $ticket->save();
+
+        ActionLog::log('support-tickets.reopened', $ticket);
 
         return redirect()->route('support.tickets.show', $ticket)
             ->with('success', trans('messages.status.success'));
