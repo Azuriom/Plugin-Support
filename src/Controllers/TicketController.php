@@ -17,8 +17,6 @@ class TicketController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -33,8 +31,6 @@ class TicketController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
@@ -46,11 +42,6 @@ class TicketController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Azuriom\Plugin\Support\Requests\TicketRequest  $request
-     * @return \Illuminate\Http\Response
-     *
-     * @throws \Exception
      */
     public function store(TicketRequest $request)
     {
@@ -61,19 +52,14 @@ class TicketController extends Controller
         $comment->persistPendingAttachments($request->input('pending_id'));
 
         if (($webhookUrl = setting('support.webhook')) !== null) {
-            $webhook = $ticket->createCreatedDiscordWebhook();
-
-            rescue(fn () => $webhook->send($webhookUrl));
+            rescue(fn () => $ticket->createCreatedDiscordWebhook()->send($webhookUrl));
         }
 
-        return redirect()->route('support.tickets.show', $ticket);
+        return to_route('support.tickets.show', $ticket);
     }
 
     /**
      * Display the specified resource.
-     *
-     * @param  \Azuriom\Plugin\Support\Models\Ticket  $ticket
-     * @return \Illuminate\Http\Response
      *
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
@@ -93,10 +79,6 @@ class TicketController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Azuriom\Plugin\Support\Requests\TicketRequest  $request
-     * @param  \Azuriom\Plugin\Support\Models\Ticket  $ticket
-     * @return \Illuminate\Http\Response
-     *
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function update(TicketRequest $request, Ticket $ticket)
@@ -105,7 +87,7 @@ class TicketController extends Controller
 
         $ticket->update($request->validated());
 
-        return redirect()->route('support.tickets.show', $ticket)
+        return to_route('support.tickets.show', $ticket)
             ->with('success', trans('support::admin.tickets.status.updated'));
     }
 
@@ -124,7 +106,7 @@ class TicketController extends Controller
             rescue(fn () => $webhook->send($webhookUrl));
         }
 
-        return redirect()->route('support.tickets.show', $ticket)
+        return to_route('support.tickets.show', $ticket)
             ->with('success', trans('messages.status.success'));
     }
 
@@ -139,7 +121,7 @@ class TicketController extends Controller
 
         ActionLog::log('support-tickets.reopened', $ticket);
 
-        return redirect()->route('support.tickets.show', $ticket)
+        return to_route('support.tickets.show', $ticket)
             ->with('success', trans('messages.status.success'));
     }
 }

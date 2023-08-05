@@ -12,8 +12,6 @@ class TicketCommented extends Notification
 
     /**
      * Create a new notification instance.
-     *
-     * @param  \Azuriom\Plugin\Support\Models\Comment  $comment
      */
     public function __construct(Comment $comment)
     {
@@ -21,23 +19,9 @@ class TicketCommented extends Notification
     }
 
     /**
-     * Get the notification's delivery channels.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function via($notifiable)
-    {
-        return ['mail'];
-    }
-
-    /**
      * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail($notifiable)
+    public function toMail(object $notifiable): MailMessage
     {
         $url = route('support.tickets.show', $this->comment->ticket);
 
@@ -49,5 +33,15 @@ class TicketCommented extends Notification
                 'id' => $this->comment->ticket->id,
             ]))
             ->action(trans('support::messages.mails.comment.view'), $url);
+    }
+
+    /**
+     * Get the notification's delivery channels.
+     *
+     * @return array<int, string>
+     */
+    public function via(object $notifiable): array
+    {
+        return ['mail'];
     }
 }

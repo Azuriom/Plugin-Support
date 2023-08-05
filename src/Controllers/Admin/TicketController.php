@@ -16,9 +16,6 @@ class TicketController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
@@ -43,9 +40,6 @@ class TicketController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  \Azuriom\Plugin\Support\Models\Ticket  $ticket
-     * @return \Illuminate\Http\Response
      */
     public function show(Ticket $ticket)
     {
@@ -58,16 +52,12 @@ class TicketController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Azuriom\Plugin\Support\Requests\TicketRequest  $request
-     * @param  \Azuriom\Plugin\Support\Models\Ticket  $ticket
-     * @return \Illuminate\Http\Response
      */
     public function update(TicketRequest $request, Ticket $ticket)
     {
         $ticket->update(Arr::except($request->validated(), 'content'));
 
-        return redirect()->route('support.admin.tickets.show', $ticket)
+        return to_route('support.admin.tickets.show', $ticket)
             ->with('success', trans('messages.status.success'));
     }
 
@@ -76,7 +66,7 @@ class TicketController extends Controller
         $ticket->closed_at = null;
         $ticket->save();
 
-        return redirect()->route('support.admin.tickets.show', $ticket)
+        return to_route('support.admin.tickets.show', $ticket)
             ->with('success', trans('messages.status.success'));
     }
 
@@ -87,23 +77,20 @@ class TicketController extends Controller
 
         ActionLog::log('support-tickets.closed', $ticket);
 
-        return redirect()->route('support.admin.tickets.show', $ticket)
+        return to_route('support.admin.tickets.show', $ticket)
             ->with('success', trans('messages.status.success'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Azuriom\Plugin\Support\Models\Ticket  $ticket
-     * @return \Illuminate\Http\Response
-     *
-     * @throws \Exception
+     * @throws \LogicException
      */
     public function destroy(Ticket $ticket)
     {
         $ticket->delete();
 
-        return redirect()->route('support.admin.tickets.index')
+        return to_route('support.admin.tickets.index')
             ->with('success', trans('messages.status.success'));
     }
 }

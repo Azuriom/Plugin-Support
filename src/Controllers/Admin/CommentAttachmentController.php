@@ -10,10 +10,6 @@ class CommentAttachmentController extends Controller
 {
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Azuriom\Http\Requests\AttachmentRequest  $request
-     * @param  string  $pendingId
-     * @return \Illuminate\Http\Response
      */
     public function pending(AttachmentRequest $request, string $pendingId)
     {

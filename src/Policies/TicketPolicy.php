@@ -9,24 +9,16 @@ class TicketPolicy
 {
     /**
      * Determine whether the user can view the ticket.
-     *
-     * @param  \Azuriom\Models\User  $user
-     * @param  \Azuriom\Plugin\Support\Models\Ticket  $ticket
-     * @return mixed
      */
-    public function view(User $user, Ticket $ticket)
+    public function view(User $user, Ticket $ticket): bool
     {
         return $user->is($ticket->author);
     }
 
     /**
      * Determine whether the user can update the ticket.
-     *
-     * @param  \Azuriom\Models\User  $user
-     * @param  \Azuriom\Plugin\Support\Models\Ticket  $ticket
-     * @return mixed
      */
-    public function update(User $user, Ticket $ticket)
+    public function update(User $user, Ticket $ticket): bool
     {
         return $user->is($ticket->author);
     }

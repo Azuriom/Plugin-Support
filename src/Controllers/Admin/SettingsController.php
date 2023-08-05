@@ -12,9 +12,6 @@ class SettingsController extends Controller
     /**
      * Update the vote settings.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     *
      * @throws \Illuminate\Validation\ValidationException
      */
     public function update(Request $request)
@@ -25,10 +22,11 @@ class SettingsController extends Controller
             'close_after_days' => ['nullable', 'integer', 'min:1'],
         ]);
 
-        Setting::updateSettings('support.reopen', $request->filled('reopen'));
-        Setting::updateSettings(Arr::prependKeysWith($settings, 'support.'));
+        Setting::updateSettings(array_merge(Arr::prependKeysWith($settings, 'support.'), [
+            'support.reopen' => $request->filled('reopen'),
+        ]));
 
-        return redirect()->route('support.admin.tickets.index')
+        return to_route('support.admin.tickets.index')
             ->with('success', trans('admin.settings.updated'));
     }
 }

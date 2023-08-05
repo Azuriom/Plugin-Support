@@ -7,7 +7,7 @@ use Azuriom\Plugin\Support\Models\Ticket;
 
 class SupportAdminDashboardComposer extends AdminDashboardCardComposer
 {
-    public function getCards()
+    public function getCards(): array
     {
         return [
             'vote_sites' => [

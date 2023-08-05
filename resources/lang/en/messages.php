@@ -46,5 +46,5 @@ return [
         ],
     ],
 
-    'days' => 'jours',
+    'days' => 'days',
 ];

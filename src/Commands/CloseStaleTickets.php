@@ -23,18 +23,14 @@ class CloseStaleTickets extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return int
-     *
-     * @throws \Exception
      */
-    public function handle()
+    public function handle(): void
     {
         $tickets = Ticket::open()->get();
         $delay = setting('support.close_after_days');
 
         if ($delay === null) {
-            return 0;
+            return;
         }
 
         foreach ($tickets as $ticket) {
@@ -44,10 +40,8 @@ class CloseStaleTickets extends Command
                 $ticket->closed_at = now();
                 $ticket->save();
 
-                $this->info('Closing ticket '.$ticket->id.' by user '.$ticket->author->name);
+                $this->info("Closing ticket {$ticket->id} by user {$ticket->author->name}");
             }
         }
-
-        return 0;
     }
 }

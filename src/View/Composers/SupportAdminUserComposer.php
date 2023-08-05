@@ -9,7 +9,7 @@ use Illuminate\View\View;
 
 class SupportAdminUserComposer extends AdminUserEditComposer
 {
-    public function getCards(User $user, View $view)
+    public function getCards(User $user, View $view): array
     {
         $tickets = Ticket::where('author_id', $user->id)->latest()->get();
 

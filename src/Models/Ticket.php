@@ -34,26 +34,22 @@ class Ticket extends Model
 
     /**
      * The table prefix associated with the model.
-     *
-     * @var string
      */
-    protected $prefix = 'support_';
+    protected string $prefix = 'support_';
+
+    /**
+     * The user key associated with this model.
+     */
+    protected string $userKey = 'author_id';
 
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var array<int, string>
      */
     protected $fillable = [
         'subject', 'category_id',
     ];
-
-    /**
-     * The user key associated with this model.
-     *
-     * @var string
-     */
-    protected $userKey = 'author_id';
 
     /**
      * Get the user who created this ticket.
@@ -87,22 +83,22 @@ class Ticket extends Model
         return $this->hasMany(Comment::class);
     }
 
-    public function userReplied()
+    public function userReplied(): bool
     {
         return $this->comment->author->is($this->author);
     }
 
-    public function statusMessage()
+    public function statusMessage(): string
     {
         return trans('support::messages.state.'.($this->isClosed() ? 'closed' : 'open'));
     }
 
-    public function isClosed()
+    public function isClosed(): bool
     {
         return $this->closed_at !== null;
     }
 
-    public function createCreatedDiscordWebhook()
+    public function createCreatedDiscordWebhook(): DiscordWebhook
     {
         $comment = $this->comments()->first();
 
@@ -120,7 +116,7 @@ class Ticket extends Model
         return DiscordWebhook::create()->addEmbed($embed);
     }
 
-    public function createClosedDiscordWebhook(User $user)
+    public function createClosedDiscordWebhook(User $user): DiscordWebhook
     {
         $embed = Embed::create()
             ->title(trans('support::messages.webhook.closed'))
@@ -137,12 +133,9 @@ class Ticket extends Model
 
     /**
      * Scope a query to only include open tickets.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeOpen(Builder $query)
+    public function scopeOpen(Builder $query): void
     {
-        return $query->whereNull('closed_at');
+        $query->whereNull('closed_at');
     }
 }

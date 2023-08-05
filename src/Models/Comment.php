@@ -11,6 +11,7 @@ use Azuriom\Models\User;
 use Azuriom\Support\Discord\DiscordWebhook;
 use Azuriom\Support\Discord\Embed;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\HtmlString;
 use Illuminate\Support\Str;
 
 /**
@@ -32,15 +33,13 @@ class Comment extends Model
 
     /**
      * The table prefix associated with the model.
-     *
-     * @var string
      */
-    protected $prefix = 'support_';
+    protected string $prefix = 'support_';
 
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var array<int, string>
      */
     protected $fillable = [
         'content',
@@ -48,10 +47,8 @@ class Comment extends Model
 
     /**
      * The user key associated with this model.
-     *
-     * @var string
      */
-    protected $userKey = 'author_id';
+    protected string $userKey = 'author_id';
 
     /**
      * Get the ticket of this comment.
@@ -69,12 +66,12 @@ class Comment extends Model
         return $this->belongsTo(User::class, 'author_id');
     }
 
-    public function parseContent()
+    public function parseContent(): HtmlString
     {
         return $this->parseMarkdown('content');
     }
 
-    public function sendDiscordWebhook()
+    public function sendDiscordWebhook(): void
     {
         if (($webhookUrl = setting('support.webhook')) === null) {
             return;
@@ -90,6 +87,7 @@ class Comment extends Model
             ->color('#004de6')
             ->footer('Azuriom v'.Azuriom::version())
             ->timestamp(now());
+
         $webhook = DiscordWebhook::create()->addEmbed($embed);
 
         rescue(fn () => $webhook->send($webhookUrl));

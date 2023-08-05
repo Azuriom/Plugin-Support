@@ -1,14 +1,11 @@
 {
     "name": "azuriom/support",
     "type": "azuriom-plugin",
-    "description": "Support plugin for Azuriom",
+    "description": "A support plugin that allows users to create a ticket when they need help.",
     "license": "MIT",
     "autoload": {
         "psr-4": {
             "Azuriom\\Plugin\\Support\\": "src/"
-        },
-        "files": [
-            "src/helpers.php"
-        ]
+        }
     }
 }

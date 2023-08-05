@@ -13,10 +13,6 @@ class TicketCommentController extends Controller
 {
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Azuriom\Plugin\Support\Requests\CommentRequest  $request
-     * @param  \Azuriom\Plugin\Support\Models\Ticket  $ticket
-     * @return \Illuminate\Http\Response
      */
     public function store(CommentRequest $request, Ticket $ticket)
     {
@@ -33,40 +29,31 @@ class TicketCommentController extends Controller
 
         $ticket->author->notify(new TicketCommented($comment));
 
-        return redirect()->route('support.admin.tickets.show', $ticket)
+        return to_route('support.admin.tickets.show', $ticket)
             ->with('success', trans('messages.status.success'));
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Azuriom\Plugin\Support\Requests\CommentRequest  $request
-     * @param  \Azuriom\Plugin\Support\Models\Ticket  $ticket
-     * @param  \Azuriom\Plugin\Support\Models\Comment  $comment
-     * @return \Illuminate\Http\Response
      */
     public function update(CommentRequest $request, Ticket $ticket, Comment $comment)
     {
         $comment->update($request->validated());
 
-        return redirect()->route('support.admin.tickets.show', $ticket)
+        return to_route('support.admin.tickets.show', $ticket)
             ->with('success', trans('messages.status.success'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Azuriom\Plugin\Support\Models\Ticket  $ticket
-     * @param  \Azuriom\Plugin\Support\Models\Comment  $comment
-     * @return \Illuminate\Http\Response
-     *
-     * @throws \Exception
+     * @throws \LogicException
      */
     public function destroy(Ticket $ticket, Comment $comment)
     {
         $comment->delete();
 
-        return redirect()->route('support.admin.tickets.show', $ticket)
+        return to_route('support.admin.tickets.show', $ticket)
             ->with('success', trans('messages.status.success'));
     }
 }

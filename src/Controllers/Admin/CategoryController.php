@@ -10,8 +10,6 @@ class CategoryController extends Controller
 {
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
@@ -20,23 +18,17 @@ class CategoryController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Azuriom\Plugin\Support\Requests\CategoryRequest  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(CategoryRequest $request)
     {
         Category::create($request->validated());
 
-        return redirect()->route('support.admin.tickets.index')
+        return to_route('support.admin.tickets.index')
             ->with('success', trans('messages.status.success'));
     }
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  \Azuriom\Plugin\Support\Models\Category  $category
-     * @return \Illuminate\Http\Response
      */
     public function edit(Category $category)
     {
@@ -45,37 +37,30 @@ class CategoryController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Azuriom\Plugin\Support\Requests\CategoryRequest  $request
-     * @param  \Azuriom\Plugin\Support\Models\Category  $category
-     * @return \Illuminate\Http\Response
      */
     public function update(CategoryRequest $request, Category $category)
     {
         $category->update($request->validated());
 
-        return redirect()->route('support.admin.tickets.index')
+        return to_route('support.admin.tickets.index')
             ->with('success', trans('messages.status.success'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Azuriom\Plugin\Support\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     *
-     * @throws \Exception
+     * @throws \LogicException
      */
     public function destroy(Category $category)
     {
         if (! $category->tickets->isEmpty()) {
-            return redirect()->route('support.admin.tickets.index')
+            return to_route('support.admin.tickets.index')
                 ->with('error', trans('support::admin.categories.delete_empty'));
         }
 
         $category->delete();
 
-        return redirect()->route('support.admin.tickets.index')
+        return to_route('support.admin.tickets.index')
             ->with('success', trans('messages.status.success'));
     }
 }
