@@ -29,9 +29,12 @@
                     <div class="content-body">
                         {{ $comment->parseContent() }}
                     </div>
-                    <a href="{{ route('support.admin.tickets.comments.destroy', [$ticket, $comment]) }}" class="btn btn-danger" title="{{ trans('messages.actions.delete') }}" data-bs-toggle="tooltip" data-confirm="delete">
-                        <i class="bi bi-trash"></i>
-                    </a>
+
+                    @if(! $comment->is($ticket->comments->first()))
+                        <a href="{{ route('support.admin.tickets.comments.destroy', [$ticket, $comment]) }}" class="btn btn-danger" title="{{ trans('messages.actions.delete') }}" data-bs-toggle="tooltip" data-confirm="delete">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    @endif
                 </div>
             </div>
         </div>
