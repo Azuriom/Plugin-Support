@@ -6,8 +6,8 @@
     <h1>{{ trans('support::messages.title') }}</h1>
 
     @if($infoText !== null)
-        <div class="card mb-4">
-            <div class="card-body pb-0">
+        <div class="card mb-3">
+            <div class="card-body pb-3">
                 {{ $infoText }}
             </div>
         </div>
