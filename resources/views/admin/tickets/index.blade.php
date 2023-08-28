@@ -122,7 +122,7 @@
                             @enderror
 
                             <small id="autoCloseInfo" class="form-text">
-                                {{ trans('support::admin.settings.webhook_info') }}
+                                {{ trans('support::admin.settings.auto_close_info') }}
                             </small>
                         </div>
                     @else
