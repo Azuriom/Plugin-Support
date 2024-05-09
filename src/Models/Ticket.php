@@ -131,6 +131,17 @@ class Ticket extends Model
         return DiscordWebhook::create()->addEmbed($embed);
     }
 
+    public static function newTicketDelay(User $user): ?string
+    {
+        $delay = setting('support.tickets_delay', 60);
+        $last = self::where('author_id', $user->id)
+            ->where('created_at', '>', now()->subSeconds($delay))
+            ->latest()
+            ->first();
+
+        return $last?->created_at->addSeconds($delay)->longAbsoluteDiffForHumans();
+    }
+
     /**
      * Scope a query to only include open tickets.
      */

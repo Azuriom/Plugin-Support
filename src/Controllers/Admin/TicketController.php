@@ -34,6 +34,7 @@ class TicketController extends Controller
             'closed' => $closed,
             'tickets' => $tickets,
             'homeMessage' => setting('support.home', ''),
+            'ticketsDelay' => setting('support.tickets_delay', 60),
             'categories' => Category::all(),
         ]);
     }

@@ -3,6 +3,8 @@
 return [
     'title' => 'Support',
 
+    'seconds' => 'seconds',
+
     'fields' => [
         'subject' => 'Subject',
         'category' => 'Category',
@@ -28,7 +30,7 @@ return [
         'open' => 'Open a ticket',
 
         'notification' => 'New response on your support ticket.',
-
+        'delay' => 'You need to wait :time before opening a new ticket.',
         'info' => '<strong>:author</strong> created this ticket in the category <strong>:category</strong> the :date.',
     ],
 

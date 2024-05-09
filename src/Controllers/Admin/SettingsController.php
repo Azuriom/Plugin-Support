@@ -18,6 +18,7 @@ class SettingsController extends Controller
     {
         $settings = $this->validate($request, [
             'home' => ['nullable', 'string'],
+            'tickets_delay' => ['nullable', 'integer', 'min:0'],
             'webhook' => ['nullable', 'url'],
             'close_after_days' => ['nullable', 'integer', 'min:1'],
         ]);

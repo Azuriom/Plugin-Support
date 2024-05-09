@@ -52,7 +52,7 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary">
-                    <i class="bi bi-check-lg"></i> {{ trans('messages.actions.send') }}
+                    <i class="bi bi-send"></i> {{ trans('messages.actions.send') }}
                 </button>
             </form>
         </div>

@@ -108,6 +108,19 @@
                         </small>
                     </div>
 
+                    <div class="mb-3">
+                        <label class="form-label" for="delayInput">{{ trans('support::admin.settings.delay') }}</label>
+
+                        <div class="input-group @error('post_delay') has-validation @enderror">
+                            <input type="number" min="0" class="form-control @error('tickets_delay') is-invalid @enderror" id="delayInput" name="tickets_delay" value="{{ old('tickets_delay', $ticketsDelay) }}" required>
+                            <span class="input-group-text">{{ trans('support::messages.seconds') }}</span>
+
+                            @error('tickets_delay')
+                            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                            @enderror
+                        </div>
+                    </div>
+
                     @if($scheduler)
                         <div class="mb-3">
                             <label class="form-label" for="autoCloseInput">{{ trans('support::admin.settings.auto_close') }}</label>

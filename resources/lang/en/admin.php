@@ -27,6 +27,7 @@ return [
     'settings' => [
         'title' => 'Support settings',
         'home_message' => 'Home message',
+        'delay' => 'Delay between two tickets',
         'webhook' => 'Discord Webhook URL',
         'webhook_info' => 'When an user create a ticket or add a comment it will create a notification on this webhook. Leave empty to disable',
         'scheduler' => 'When CRON tasks are setup, tickets can be automatically closed after a certain time.',

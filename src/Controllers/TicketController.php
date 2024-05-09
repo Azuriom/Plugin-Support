@@ -45,6 +45,13 @@ class TicketController extends Controller
      */
     public function store(TicketRequest $request)
     {
+        if ($delay = Ticket::newTicketDelay($request->user())) {
+            return redirect()->back()->withInput()
+                ->with('error', trans('support::messages.tickets.delay', [
+                    'time' => $delay,
+                ]));
+        }
+
         $ticket = Ticket::create(Arr::except($request->validated(), 'content'));
 
         $comment = $ticket->comments()->create(Arr::only($request->validated(), 'content'));
@@ -110,7 +117,7 @@ class TicketController extends Controller
             ->with('success', trans('messages.status.success'));
     }
 
-    public function open(Request $request, Ticket $ticket)
+    public function open(Ticket $ticket)
     {
         abort_if(! setting('support.reopen', false), 404);
 
