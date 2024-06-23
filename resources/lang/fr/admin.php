@@ -24,6 +24,20 @@ return [
         'categories' => 'Voir et gérer les catégories des tickets du support',
     ],
 
+    'fields' => [
+        'title' => 'Champs du modèle pour les tickets',
+        'info' => 'Un modèle est utilisé pour définir les champs qui seront affichés lors de la création d\'un ticket au lieu d\'un champ de texte libre.',
+        'required' => 'Est-ce que ce champ est requis ?',
+        'options' => 'Options',
+
+        'text' => 'Texte',
+        'textarea' => 'Zone de texte (plusieurs lignes)',
+        'number' => 'Nombre',
+        'email' => 'E-Mail',
+        'checkbox' => 'Case à cocher',
+        'dropdown' => 'Menu déroulant',
+    ],
+
     'settings' => [
         'title' => 'Paramètres du support',
         'home_message' => 'Message de la page d\'accueil',

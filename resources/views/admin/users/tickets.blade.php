@@ -5,7 +5,7 @@
             <th scope="col">{{ trans('support::messages.fields.subject') }}</th>
             <th scope="col">{{ trans('messages.fields.author') }}</th>
             <th scope="col">{{ trans('messages.fields.status') }}</th>
-            <th scope="col">{{ trans('support::messages.fields.category') }}</th>
+            <th scope="col">{{ trans('messages.fields.category') }}</th>
             <th scope="col">{{ trans('messages.fields.date') }}</th>
         </tr>
         </thead>

@@ -19,7 +19,7 @@
                 <thead class="table-dark">
                 <tr>
                     <th scope="col">{{ trans('support::messages.fields.subject') }}</th>
-                    <th scope="col">{{ trans('support::messages.fields.category') }}</th>
+                    <th scope="col">{{ trans('messages.fields.category') }}</th>
                     <th scope="col">{{ trans('messages.fields.status') }}</th>
                     <th scope="col">{{ trans('messages.fields.date') }}</th>
                 </tr>

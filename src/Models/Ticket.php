@@ -3,6 +3,7 @@
 namespace Azuriom\Plugin\Support\Models;
 
 use Azuriom\Azuriom;
+use Azuriom\Models\Traits\AttachableParent;
 use Azuriom\Models\Traits\HasTablePrefix;
 use Azuriom\Models\Traits\HasUser;
 use Azuriom\Models\User;
@@ -29,8 +30,14 @@ use Illuminate\Support\Str;
  */
 class Ticket extends Model
 {
+    use AttachableParent;
     use HasTablePrefix;
     use HasUser;
+
+    /**
+     * The relation name from this parent class to the class with attachments.
+     */
+    protected static string $attachableRelation = 'comments';
 
     /**
      * The table prefix associated with the model.
@@ -106,7 +113,7 @@ class Ticket extends Model
             ->title(trans('support::messages.webhook.ticket'))
             ->author($this->author->name, null, $this->author->getAvatar())
             ->addField(trans('messages.fields.title'), $this->subject)
-            ->addField(trans('support::messages.fields.category'), $this->category->name)
+            ->addField(trans('messages.fields.category'), $this->category->name)
             ->addField(trans('messages.fields.content'), Str::limit($comment->content, 1995))
             ->url(route('support.admin.tickets.show', $this))
             ->color('#004de6')
@@ -122,7 +129,7 @@ class Ticket extends Model
             ->title(trans('support::messages.webhook.closed'))
             ->author($user->name, null, $user->getAvatar())
             ->addField(trans('messages.fields.title'), $this->subject)
-            ->addField(trans('support::messages.fields.category'), $this->category->name)
+            ->addField(trans('messages.fields.category'), $this->category->name)
             ->url(route('support.admin.tickets.show', $this))
             ->color('#004de6')
             ->footer('Azuriom v'.Azuriom::version())

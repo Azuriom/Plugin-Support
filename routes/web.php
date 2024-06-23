@@ -1,5 +1,6 @@
 <?php
 
+use Azuriom\Plugin\Support\Controllers\CategoryTicketController;
 use Azuriom\Plugin\Support\Controllers\CommentAttachmentController;
 use Azuriom\Plugin\Support\Controllers\TicketCommentController;
 use Azuriom\Plugin\Support\Controllers\TicketController;
@@ -22,7 +23,8 @@ Route::redirect('/', '/support/tickets');
 Route::middleware('auth')->group(function () {
     Route::post('/{ticket}/close', [TicketController::class, 'close'])->name('tickets.close');
     Route::post('/{ticket}/open', [TicketController::class, 'open'])->name('tickets.open');
-    Route::resource('tickets', TicketController::class)->except(['edit', 'destroy']);
+    Route::resource('category.tickets', CategoryTicketController::class)->only(['create', 'store']);
+    Route::resource('tickets', TicketController::class)->except(['store', 'edit', 'destroy']);
     Route::resource('tickets.comments', TicketCommentController::class)->only(['store', 'update', 'destroy']);
     Route::post('comments/attachments/{pendingId}', [CommentAttachmentController::class, 'pending'])
         ->name('comments.attachments.pending');

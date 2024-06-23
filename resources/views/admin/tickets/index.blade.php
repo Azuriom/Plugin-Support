@@ -33,7 +33,7 @@
                         <th scope="col">{{ trans('support::messages.fields.subject') }}</th>
                         <th scope="col">{{ trans('messages.fields.author') }}</th>
                         <th scope="col">{{ trans('messages.fields.status') }}</th>
-                        <th scope="col">{{ trans('support::messages.fields.category') }}</th>
+                        <th scope="col">{{ trans('messages.fields.category') }}</th>
                         <th scope="col">{{ trans('messages.fields.date') }}</th>
                         <th scope="col">{{ trans('messages.fields.action') }}</th>
                     </tr>
@@ -103,9 +103,9 @@
                         <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                         @enderror
 
-                        <small id="webhookInfo" class="form-text">
+                        <div id="webhookInfo" class="form-text">
                             {{ trans('support::admin.settings.webhook_info') }}
-                        </small>
+                        </div>
                     </div>
 
                     <div class="mb-3">
@@ -134,9 +134,9 @@
                             <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                             @enderror
 
-                            <small id="autoCloseInfo" class="form-text">
+                            <div id="autoCloseInfo" class="form-text">
                                 {{ trans('support::admin.settings.auto_close_info') }}
-                            </small>
+                            </div>
                         </div>
                     @else
                         <div class="alert alert-info">

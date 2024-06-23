@@ -4,6 +4,7 @@ namespace Azuriom\Plugin\Support\Controllers\Admin;
 
 use Azuriom\Http\Controllers\Controller;
 use Azuriom\Plugin\Support\Models\Category;
+use Azuriom\Plugin\Support\Models\Field;
 use Azuriom\Plugin\Support\Requests\CategoryRequest;
 
 class CategoryController extends Controller
@@ -13,7 +14,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('support::admin.categories.create');
+        return view('support::admin.categories.create', [
+            'fieldTypes' => Field::TYPES,
+        ]);
     }
 
     /**
@@ -21,7 +24,9 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        Category::create($request->validated());
+        $category = Category::create($request->validated());
+
+        $category->syncFields($request->input('fields', []));
 
         return to_route('support.admin.tickets.index')
             ->with('success', trans('messages.status.success'));
@@ -32,7 +37,10 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('support::admin.categories.edit', ['category' => $category]);
+        return view('support::admin.categories.edit', [
+            'category' => $category,
+            'fieldTypes' => Field::TYPES,
+        ]);
     }
 
     /**
@@ -41,6 +49,8 @@ class CategoryController extends Controller
     public function update(CategoryRequest $request, Category $category)
     {
         $category->update($request->validated());
+
+        $category->syncFields($request->input('fields', []));
 
         return to_route('support.admin.tickets.index')
             ->with('success', trans('messages.status.success'));

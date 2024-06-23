@@ -81,7 +81,7 @@ class Comment extends Model
             ->title(trans('support::messages.webhook.comment'))
             ->author($this->author->name, null, $this->author->getAvatar())
             ->addField(trans('support::messages.fields.ticket'), $this->ticket->subject)
-            ->addField(trans('support::messages.fields.category'), $this->ticket->category->name)
+            ->addField(trans('messages.fields.category'), $this->ticket->category->name)
             ->addField(trans('messages.fields.content'), Str::limit($this->content, 1995))
             ->url(route('support.admin.tickets.show', $this->ticket))
             ->color('#004de6')

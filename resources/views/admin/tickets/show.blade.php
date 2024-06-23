@@ -80,7 +80,7 @@
                     @csrf
 
                     <button type="submit" class="btn btn-danger">
-                        <i class="bi bi-x-lg"></i> {{ trans('support::messages.actions.close') }}
+                        <i class="bi bi-x-lg"></i> {{ trans('messages.actions.close') }}
                     </button>
                 </form>
             @endif

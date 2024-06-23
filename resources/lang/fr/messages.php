@@ -7,7 +7,6 @@ return [
 
     'fields' => [
         'subject' => 'Sujet',
-        'category' => 'Catégorie',
         'ticket' => 'Ticket',
         'comment' => 'Commentaire',
     ],
@@ -15,7 +14,6 @@ return [
     'actions' => [
         'create' => 'Ouvrir un nouveau ticket',
         'reopen' => 'Réouvrir',
-        'close' => 'Fermer',
     ],
 
     'state' => [

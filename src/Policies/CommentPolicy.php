@@ -23,7 +23,7 @@ class CommentPolicy
      */
     public function create(User $user): bool
     {
-        return true; // TODO
+        return true;
     }
 
     /**

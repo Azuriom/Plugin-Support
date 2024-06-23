@@ -8,7 +8,6 @@ use Azuriom\Plugin\Support\Models\Category;
 use Azuriom\Plugin\Support\Models\Ticket;
 use Azuriom\Plugin\Support\Requests\TicketRequest;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Str;
@@ -34,35 +33,12 @@ class TicketController extends Controller
      */
     public function create()
     {
-        return view('support::tickets.create', [
+        $infoText = setting('support.home');
+
+        return view('support::tickets.categories', [
             'categories' => Category::all(),
-            'pendingId' => old('pending_id', Str::uuid()),
+            'infoText' => $infoText !== null ? new HtmlString($infoText) : null,
         ]);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(TicketRequest $request)
-    {
-        if ($delay = Ticket::newTicketDelay($request->user())) {
-            return redirect()->back()->withInput()
-                ->with('error', trans('support::messages.tickets.delay', [
-                    'time' => $delay,
-                ]));
-        }
-
-        $ticket = Ticket::create(Arr::except($request->validated(), 'content'));
-
-        $comment = $ticket->comments()->create(Arr::only($request->validated(), 'content'));
-
-        $comment->persistPendingAttachments($request->input('pending_id'));
-
-        if (($webhookUrl = setting('support.webhook')) !== null) {
-            rescue(fn () => $ticket->createCreatedDiscordWebhook()->send($webhookUrl));
-        }
-
-        return to_route('support.tickets.show', $ticket);
     }
 
     /**

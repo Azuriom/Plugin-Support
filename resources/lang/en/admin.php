@@ -24,6 +24,20 @@ return [
         'categories' => 'View and manage support categories',
     ],
 
+    'fields' => [
+        'title' => 'Ticket template fields',
+        'info' => 'A ticket template is used to define the fields that will be displayed when creating a ticket instead of a free text field.',
+        'required' => 'Is this field required?',
+        'options' => 'Options',
+
+        'text' => 'Text',
+        'textarea' => 'Textarea (multiple lines)',
+        'number' => 'Number',
+        'email' => 'E-Mail',
+        'checkbox' => 'Checkbox',
+        'dropdown' => 'Dropdown',
+    ],
+
     'settings' => [
         'title' => 'Support settings',
         'home_message' => 'Home message',
