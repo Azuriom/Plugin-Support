@@ -23,7 +23,7 @@ class TicketCommentController extends Controller
 
         (new AlertNotification(trans('support::messages.tickets.notification')))
             ->from($comment->author)
-            ->link(route('support.tickets.show', $ticket))
+            ->link(route('support.tickets.show', $ticket, false))
             ->send($ticket->author);
 
         $comment->sendDiscordWebhook();
