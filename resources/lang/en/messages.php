@@ -14,6 +14,7 @@ return [
     'actions' => [
         'create' => 'Open a new ticket',
         'reopen' => 'Reopen',
+        'close' => 'Close',
     ],
 
     'state' => [
