@@ -11,7 +11,10 @@ class SupportAdminUserComposer extends AdminUserEditComposer
 {
     public function getCards(User $user, View $view): array
     {
-        $tickets = Ticket::where('author_id', $user->id)->latest()->get();
+        $tickets = Ticket::whereBelongsTo($user, 'author')
+            ->with(['author', 'category'])
+            ->latest()
+            ->get();
 
         if ($tickets->isEmpty()) {
             return [];

@@ -6,6 +6,7 @@ use Azuriom\Http\Controllers\Controller;
 use Azuriom\Plugin\Support\Models\Category;
 use Azuriom\Plugin\Support\Models\Field;
 use Azuriom\Plugin\Support\Requests\CategoryRequest;
+use Illuminate\Support\Arr;
 
 class CategoryController extends Controller
 {
@@ -24,7 +25,7 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        $category = Category::create($request->validated());
+        $category = Category::create(Arr::except($request->validated(), 'fields'));
 
         $category->syncFields($request->input('fields', []));
 
@@ -48,7 +49,7 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, Category $category)
     {
-        $category->update($request->validated());
+        $category->update(Arr::except($request->validated(), 'fields'));
 
         $category->syncFields($request->input('fields', []));
 

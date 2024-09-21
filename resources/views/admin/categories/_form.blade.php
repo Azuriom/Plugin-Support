@@ -11,7 +11,7 @@
 
 <div class="mb-3">
     <label class="form-label" for="descriptionInput">{{ trans('messages.fields.description') }}</label>
-    <input type="text" class="form-control @error('description') is-invalid @enderror" id="descriptionInput" name="description" value="{{ old('description', $category->description ?? '') }}" required>
+    <input type="text" class="form-control @error('description') is-invalid @enderror" id="descriptionInput" name="description" value="{{ old('description', $category->description ?? '') }}">
 
     @error('description')
     <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
@@ -79,7 +79,7 @@
 
             <div class="form-check form-switch mb-3">
                 <input type="checkbox" class="form-check-input" :name="`fields[${i}][is_required]`" :id="'requiredSwitch' + i" v-model="field.is_required">
-                <label class="form-check-label" for="'requiredSwitch' + i">{{ trans('support::admin.fields.required') }}</label>
+                <label class="form-check-label" :for="'requiredSwitch' + i">{{ trans('support::admin.fields.required') }}</label>
             </div>
 
             <input v-if="field.id" type="hidden" :value="field.id" :name="`fields[${i}][id]`">

@@ -46,15 +46,9 @@
                             <td>{{ $ticket->subject }}</td>
                             <td>{{ $ticket->author->name }}</td>
                             <td>
-                                @if($ticket->isClosed() || ! $ticket->userReplied())
-                                    <span class="badge bg-{{ $ticket->isClosed() ? 'danger' : 'success' }}">
-                                        {{ $ticket->statusMessage() }}
-                                    </span>
-                                @else
-                                    <span class="badge bg-primary">
-                                        {{ trans('support::messages.state.replied') }}
-                                    </span>
-                                @endif
+                                <span class="badge bg-{{ $ticket->statusColor(true) }}">
+                                    {{ $ticket->statusMessage(true) }}
+                                </span>
                             </td>
                             <td>{{ $ticket->category->name }}</td>
                             <td>{{ format_date_compact($ticket->created_at) }}</td>

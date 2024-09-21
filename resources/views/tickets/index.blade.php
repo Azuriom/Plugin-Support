@@ -33,9 +33,9 @@
                         </td>
                         <td>{{ $ticket->category->name }}</td>
                         <td>
-                        <span class="badge bg-{{ $ticket->isClosed() ? 'danger' : 'success' }}">
-                            {{ $ticket->statusMessage() }}
-                        </span>
+                            <span class="badge bg-{{ $ticket->statusColor() }}">
+                                {{ $ticket->statusMessage() }}
+                            </span>
                         </td>
                         <td>{{ format_date_compact($ticket->created_at) }}</td>
                     </tr>

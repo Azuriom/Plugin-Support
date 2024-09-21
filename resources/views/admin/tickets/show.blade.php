@@ -9,9 +9,9 @@
 @section('content')
     <div class="card shadow-sm mb-3">
         <div class="card-body">
-             <span class="badge bg-{{ $ticket->isClosed() ? 'danger' : 'success' }}">
-                 {{ $ticket->statusMessage() }}
-             </span>
+            <span class="badge bg-{{ $ticket->statusColor(true) }}">
+                {{ $ticket->statusMessage(true) }}
+            </span>
             @lang('support::messages.tickets.info', ['author' => e($ticket->author->name), 'category' => e($ticket->category->name), 'date' => format_date($ticket->created_at)])
         </div>
     </div>

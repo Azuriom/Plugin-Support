@@ -90,14 +90,32 @@ class Ticket extends Model
         return $this->hasMany(Comment::class);
     }
 
-    public function userReplied(): bool
+    public function authorReplied(): bool
     {
         return $this->comment->author->is($this->author);
     }
 
-    public function statusMessage(): string
+    public function status(bool $authorReplies = false): string
     {
-        return trans('support::messages.state.'.($this->isClosed() ? 'closed' : 'open'));
+        if ($this->isClosed()) {
+            return 'closed';
+        }
+
+        return $authorReplies && $this->authorReplied() ? 'replied' : 'open';
+    }
+
+    public function statusColor(bool $authorReplies = false): string
+    {
+        return match ($this->status($authorReplies)) {
+            'replied' => 'primary',
+            'closed' => 'danger',
+            default => 'success',
+        };
+    }
+
+    public function statusMessage(bool $authorReplies = false): string
+    {
+        return trans('support::messages.state.'.$this->status($authorReplies));
     }
 
     public function isClosed(): bool

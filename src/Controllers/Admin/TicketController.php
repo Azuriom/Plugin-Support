@@ -56,7 +56,7 @@ class TicketController extends Controller
      */
     public function update(TicketRequest $request, Ticket $ticket)
     {
-        $ticket->update(Arr::except($request->validated(), 'content'));
+        $ticket->update(Arr::only($request->validated(), 'subject'));
 
         return to_route('support.admin.tickets.show', $ticket)
             ->with('success', trans('messages.status.success'));

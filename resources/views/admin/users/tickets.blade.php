@@ -20,7 +20,7 @@
                 </td>
                 <td>{{ $ticket->author->name }}</td>
                 <td>
-                    <span class="badge bg-{{ $ticket->isClosed() ? 'danger' : 'success' }}">
+                    <span class="badge bg-{{ $ticket->statusColor() }}">
                         {{ $ticket->statusMessage() }}
                     </span>
                 </td>

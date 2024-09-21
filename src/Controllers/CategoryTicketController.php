@@ -34,7 +34,7 @@ class CategoryTicketController extends Controller
                 ]));
         }
 
-        $ticket = $category->tickets()->create(Arr::except($request->validated(), 'content'));
+        $ticket = $category->tickets()->create(Arr::only($request->validated(), 'subject'));
 
         $comment = $ticket->comments()->create(Arr::only($request->validated(), 'content'));
 
