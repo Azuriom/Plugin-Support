@@ -56,7 +56,7 @@
                             </td>
                             <td>
                                 @if($ticket->category->icon)
-                                    <i class="bi {{ $ticket->category->icon }}"></i>
+                                    <i class="{{ $ticket->category->icon }}"></i>
                                 @endif
                                 {{ $ticket->category->name }}
                             </td>
@@ -182,7 +182,7 @@
                                 <th scope="row">{{ $category->id }}</th>
                                 <td>
                                     @if($category->icon)
-                                        <i class="bi {{ $category->icon }}"></i>
+                                        <i class="{{ $category->icon }}"></i>
                                     @endif
                                     {{ $category->name }}
                                 </td>

@@ -13,11 +13,15 @@
     <div class="mb-3 col-md-6">
         <label class="form-label" for="iconInput">{{ trans('messages.fields.icon') }}</label>
 
-        <input type="text" class="form-control @error('icon') is-invalid @enderror" id="iconInput" name="icon" value="{{ old('icon', $category->icon ?? '') }}" placeholder="bi bi-info-square" aria-labelledby="iconLabel">
+        <div class="input-group @error('icon') has-validation @enderror">
+            <span class="input-group-text"><i class="{{ $category->icon ?? 'bi bi-question-circle' }}"></i></span>
 
-        @error('icon')
-        <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-        @enderror
+            <input type="text" class="form-control @error('icon') is-invalid @enderror" id="iconInput" name="icon" value="{{ old('icon', $category->icon ?? '') }}" placeholder="bi bi-question-circle" aria-labelledby="iconLabel">
+
+            @error('icon')
+            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+            @enderror
+        </div>
 
         <small id="iconLabel" class="form-text">@lang('messages.icons')</small>
     </div>
