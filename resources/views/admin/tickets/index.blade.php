@@ -19,7 +19,7 @@
                     </a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link @if($closed) active @endif" href="{{ route('support.admin.tickets.index') }}?closed#tickets" role="tab">
+                    <a class="nav-link @if($closed) active @endif" href="{{ route('support.admin.tickets.index') }}?status=closed#tickets" role="tab">
                         {{ trans('support::messages.state.closed') }}
                     </a>
                 </li>
@@ -44,13 +44,22 @@
                         <tr>
                             <th scope="row">{{ $ticket->id }}</th>
                             <td>{{ $ticket->subject }}</td>
-                            <td>{{ $ticket->author->name }}</td>
+                            <td>
+                                <a href="{{ route('admin.users.edit', $ticket->author) }}">
+                                    {{ $ticket->author->name }}
+                                </a>
+                            </td>
                             <td>
                                 <span class="badge bg-{{ $ticket->statusColor(true) }}">
                                     {{ $ticket->statusMessage(true) }}
                                 </span>
                             </td>
-                            <td>{{ $ticket->category->name }}</td>
+                            <td>
+                                @if($ticket->category->icon)
+                                    <i class="bi {{ $ticket->category->icon }}"></i>
+                                @endif
+                                {{ $ticket->category->name }}
+                            </td>
                             <td>{{ format_date_compact($ticket->created_at) }}</td>
                             <td>
                                 <a href="{{ route('support.admin.tickets.show', $ticket) }}" class="mx-1" title="{{ trans('messages.actions.show') }}" data-bs-toggle="tooltip"><i class="bi bi-eye"></i></a>
@@ -171,7 +180,12 @@
                         @foreach($categories as $category)
                             <tr>
                                 <th scope="row">{{ $category->id }}</th>
-                                <td>{{ $category->name }}</td>
+                                <td>
+                                    @if($category->icon)
+                                        <i class="bi {{ $category->icon }}"></i>
+                                    @endif
+                                    {{ $category->name }}
+                                </td>
                                 <td>
                                     <a href="{{ route('support.admin.categories.edit', $category) }}" class="mx-1" title="{{ trans('messages.actions.edit') }}" data-bs-toggle="tooltip"><i class="bi bi-pencil-square"></i></a>
                                     <a href="{{ route('support.admin.categories.destroy', $category) }}" class="mx-1" title="{{ trans('messages.actions.delete') }}" data-bs-toggle="tooltip" data-confirm="delete"><i class="bi bi-trash"></i></a>

@@ -15,6 +15,7 @@ class CategoryRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:50'],
+            'icon' => ['nullable', 'string', 'max:50'],
             'description' => ['nullable', 'string', 'max:200'],
             'fields' => ['sometimes', 'array'],
         ];

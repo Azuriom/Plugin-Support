@@ -19,7 +19,7 @@ class TicketController extends Controller
      */
     public function index(Request $request)
     {
-        $closed = $request->has('closed');
+        $closed = $request->input('status') === 'closed';
         $tickets = Ticket::with(['category', 'author'])
             ->tap(fn (Builder $query) => $closed
                 ? $query->whereNotNull('closed_at')

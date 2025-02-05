@@ -19,11 +19,20 @@
                 <li class="list-group-item">
                     <div class="row justify-content-around">
                         <div class="col-md-8 align-self-center">
-                            <h5 class="card-title mb-0">{{ $category->name }}</h5>
+                            <div class="d-flex">
+                                <div class="flex-shrink-0 align-self-center fs-1 text-primary">
+                                    @if($category->icon)
+                                        <i class="{{ $category->icon }}"></i>
+                                    @endif
+                                </div>
+                                <div class="flex-grow-1 ms-3 align-self-center">
+                                    <h5 class="card-title mb-0">{{ $category->name }}</h5>
 
-                            @if($category->description)
-                                <p class="card-text mt-2 mb-0">{{ $category->description }}</p>
-                            @endif
+                                    @if($category->description)
+                                        <p class="card-text mt-2 mb-0">{{ $category->description }}</p>
+                                    @endif
+                                </div>
+                            </div>
                         </div>
 
                         <div class="col-auto align-self-center">

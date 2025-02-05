@@ -9,6 +9,7 @@ use Illuminate\Support\Arr;
 /**
  * @property int $id
  * @property string $name
+ * @property string|null $icon
  * @property string|null $description
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
@@ -30,7 +31,7 @@ class Category extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name', 'description',
+        'name', 'icon', 'description',
     ];
 
     /**

@@ -31,7 +31,12 @@
                         <td>
                             <a href="{{ route('support.tickets.show', $ticket) }}">{{ $ticket->subject }}</a>
                         </td>
-                        <td>{{ $ticket->category->name }}</td>
+                        <td>
+                            @if($ticket->category->icon)
+                                <i class="{{ $ticket->category->icon }}"></i>
+                            @endif
+                            {{ $ticket->category->name }}
+                        </td>
                         <td>
                             <span class="badge bg-{{ $ticket->statusColor() }}">
                                 {{ $ticket->statusMessage() }}

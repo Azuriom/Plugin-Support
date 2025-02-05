@@ -23,9 +23,10 @@ class SettingsController extends Controller
             'close_after_days' => ['nullable', 'integer', 'min:1'],
         ]);
 
-        Setting::updateSettings(Arr::prependKeysWith(array_merge($settings, [
+        Setting::updateSettings(Arr::prependKeysWith([
+            ...$settings,
             'reopen' => $request->filled('reopen'),
-        ]), 'support.'));
+        ], 'support.'));
 
         return to_route('support.admin.tickets.index')
             ->with('success', trans('admin.settings.updated'));

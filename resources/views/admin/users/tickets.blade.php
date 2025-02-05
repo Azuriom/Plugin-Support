@@ -24,7 +24,12 @@
                         {{ $ticket->statusMessage() }}
                     </span>
                 </td>
-                <td>{{ $ticket->category->name }}</td>
+                <td>
+                    @if($ticket->category->icon)
+                        <i class="bi {{ $ticket->category->icon }}"></i>
+                    @endif
+                    {{ $ticket->category->name }}
+                </td>
                 <td>{{ format_date_compact($ticket->created_at) }}</td>
             </tr>
         @endforeach
