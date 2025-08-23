@@ -13,6 +13,12 @@
                 {{ $ticket->statusMessage(true) }}
             </span>
             @lang('support::messages.tickets.info', ['author' => e($ticket->author->name), 'category' => e($ticket->category->name), 'date' => format_date($ticket->created_at)])
+            @if($ticket->assignee !== null)
+                <br>
+                @lang('support::admin.tickets.assigned', [
+                    'assignee' => '<a href="'.e(route('admin.users.edit', $ticket->assignee)).'">'.e($ticket->assignee->name).'</a>',
+                ])
+            @endif
         </div>
     </div>
 
@@ -54,7 +60,9 @@
                         <i class="bi bi-arrow-repeat"></i> {{ trans('support::messages.actions.reopen') }}
                     </button>
 
-                    <a href="{{ route('support.admin.tickets.destroy', $ticket) }}" class="btn btn-danger" data-confirm="delete"><i class="bi bi-trash"></i> {{ trans('messages.actions.delete') }}</a>
+                    <a href="{{ route('support.admin.tickets.destroy', $ticket) }}" class="btn btn-danger" data-confirm="delete">
+                        <i class="bi bi-trash"></i> {{ trans('messages.actions.delete') }}
+                    </a>
                 </form>
             @else
                 <form action="{{ route('support.admin.tickets.comments.store', $ticket) }}" method="POST" class="mb-2">
@@ -76,7 +84,25 @@
                     </button>
                 </form>
 
-                <form action="{{ route('support.admin.tickets.close', $ticket) }}" method="POST">
+                @if($ticket->assignee !== null)
+                    <form action="{{ route('support.admin.tickets.unassign', $ticket) }}" method="POST" class="d-inline-block">
+                        @csrf
+
+                        <button type="submit" class="btn btn-warning">
+                            <i class="bi bi-person-x"></i> {{ trans('support::admin.tickets.clear_assignee') }}
+                        </button>
+                    </form>
+                @else
+                    <form action="{{ route('support.admin.tickets.assign', $ticket) }}" method="POST" class="d-inline-block">
+                        @csrf
+
+                        <button type="submit" class="btn btn-secondary">
+                            <i class="bi bi-person-add"></i> {{ trans('support::admin.tickets.assign') }}
+                        </button>
+                    </form>
+                @endif
+
+                <form action="{{ route('support.admin.tickets.close', $ticket) }}" method="POST" class="d-inline-block">
                     @csrf
 
                     <button type="submit" class="btn btn-danger">

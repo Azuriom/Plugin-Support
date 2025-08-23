@@ -17,6 +17,13 @@ return [
         'create' => 'Create ticket',
 
         'open' => 'Open tickets',
+        'assign' => 'Assign yourself',
+        'assigned' => 'Assigned to :assignee',
+        'clear_assignee' => 'Clear assignee',
+
+        'all' => 'Assigned and unassigned',
+        'unassigned' => 'Unassigned',
+        'self' => 'Assigned to me',
     ],
 
     'permissions' => [

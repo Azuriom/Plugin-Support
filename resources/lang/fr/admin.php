@@ -17,6 +17,13 @@ return [
         'create' => 'Créer un ticket',
 
         'open' => 'Tickets ouverts',
+        'assign' => 'S\'assigner à ce ticket',
+        'assigned' => 'Assigné à :assignee',
+        'clear_assignee' => 'Supprimer l\'assignation',
+
+        'all' => 'Assignés et non assignés',
+        'unassigned' => 'Non assignés',
+        'self' => 'Assignés à moi',
     ],
 
     'permissions' => [

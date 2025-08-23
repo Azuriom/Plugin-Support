@@ -20,17 +20,24 @@ class TicketController extends Controller
     public function index(Request $request)
     {
         $closed = $request->input('status') === 'closed';
-        $tickets = Ticket::with(['category', 'author'])
+        $assignFilter = $request->input('assign', 'all');
+        $tickets = Ticket::with(['category', 'author', 'assignee'])
             ->tap(fn (Builder $query) => $closed
                 ? $query->whereNotNull('closed_at')
                 : $query->whereNull('closed_at')
             )
+            ->when($assignFilter !== 'all', fn (Builder $query) => $assignFilter === 'self'
+                ? $query->where('assignee_id', $request->user()->id)
+                : $query->whereNull('assignee_id')
+            )
             ->with('comment.author')
-            ->latest('updated_at')
+            ->withMax('comments', 'created_at')
+            ->latest('comments_max_created_at')
             ->paginate();
 
         return view('support::admin.tickets.index', [
             'scheduler' => function_exists('scheduler_running') && scheduler_running(),
+            'assignFilter' => $assignFilter,
             'closed' => $closed,
             'tickets' => $tickets,
             'homeMessage' => setting('support.home', ''),
@@ -77,6 +84,24 @@ class TicketController extends Controller
         $ticket->save();
 
         ActionLog::log('support-tickets.closed', $ticket);
+
+        return to_route('support.admin.tickets.show', $ticket)
+            ->with('success', trans('messages.status.success'));
+    }
+
+    public function assign(Request $request, Ticket $ticket)
+    {
+        $ticket->assignee()->associate($request->user());
+        $ticket->save();
+
+        return to_route('support.admin.tickets.show', $ticket)
+            ->with('success', trans('messages.status.success'));
+    }
+
+    public function unassign(Ticket $ticket)
+    {
+        $ticket->assignee()->dissociate();
+        $ticket->save();
 
         return to_route('support.admin.tickets.show', $ticket)
             ->with('success', trans('messages.status.success'));

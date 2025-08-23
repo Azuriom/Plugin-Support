@@ -18,10 +18,12 @@ use Illuminate\Support\Str;
  * @property string $subject
  * @property int $author_id
  * @property int $category_id
+ * @property int|null $assignee_id
  * @property \Carbon\Carbon|null $closed_at
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property \Azuriom\Models\User $author
+ * @property \Azuriom\Models\User|null $assignee
  * @property \Azuriom\Plugin\Support\Models\Category $category
  * @property \Azuriom\Plugin\Support\Models\Comment $comment
  * @property \Illuminate\Support\Collection|\Azuriom\Plugin\Support\Models\Comment[] $comments
@@ -64,6 +66,14 @@ class Ticket extends Model
     public function author()
     {
         return $this->belongsTo(User::class, 'author_id');
+    }
+
+    /**
+     * Get the user who is assigned to this ticket.
+     */
+    public function assignee()
+    {
+        return $this->belongsTo(User::class, 'assignee_id');
     }
 
     /**

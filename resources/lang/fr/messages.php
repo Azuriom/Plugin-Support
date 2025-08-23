@@ -9,6 +9,7 @@ return [
         'subject' => 'Sujet',
         'ticket' => 'Ticket',
         'comment' => 'Commentaire',
+        'assignee' => 'Assigné',
     ],
 
     'actions' => [

@@ -13,15 +13,33 @@
         </div>
         <div class="card-body">
             <ul class="nav nav-pills" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link @if(!$closed) active @endif" href="{{ route('support.admin.tickets.index') }}#tickets" role="tab">
+                <li class="nav-item my-2 my-md-0" role="presentation">
+                    <a class="nav-link @if(!$closed) active @endif" href="{{ request()->fullUrlWithQuery(['status' => null]) }}#tickets" role="tab">
                         {{ trans('support::messages.state.open') }}
                     </a>
                 </li>
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link @if($closed) active @endif" href="{{ route('support.admin.tickets.index') }}?status=closed#tickets" role="tab">
+                <li class="nav-item my-2 my-md-0" role="presentation">
+                    <a class="nav-link @if($closed) active @endif" href="{{ request()->fullUrlWithQuery(['status' => 'closed']) }}#tickets" role="tab">
                         {{ trans('support::messages.state.closed') }}
                     </a>
+                </li>
+
+                <li class="nav-item ms-md-3 my-2 my-md-0" role="presentation">
+                    <form action="{{ route('support.admin.tickets.index') }}" method="GET" class="d-inline-block">
+                        <input type="hidden" name="status" value="{{ $closed ? 'closed' : '' }}">
+                        <div class="input-group">
+                            <select class="form-select" name="assign">
+                                @foreach(['all', 'unassigned', 'self'] as $option)
+                                    <option value="{{ $option }}" @selected($assignFilter === $option)>
+                                        {{ trans('support::admin.tickets.'.$option) }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <button type="submit" class="btn btn-primary" title="{{ trans('messages.actions.search') }}">
+                                <i class="bi bi-filter"></i>
+                            </button>
+                        </div>
+                    </form>
                 </li>
             </ul>
 
@@ -32,6 +50,7 @@
                         <th scope="col">#</th>
                         <th scope="col">{{ trans('support::messages.fields.subject') }}</th>
                         <th scope="col">{{ trans('messages.fields.author') }}</th>
+                        <th scope="col">{{ trans('support::messages.fields.assignee') }}</th>
                         <th scope="col">{{ trans('messages.fields.status') }}</th>
                         <th scope="col">{{ trans('messages.fields.category') }}</th>
                         <th scope="col">{{ trans('messages.fields.date') }}</th>
@@ -48,6 +67,15 @@
                                 <a href="{{ route('admin.users.edit', $ticket->author) }}">
                                     {{ $ticket->author->name }}
                                 </a>
+                            </td>
+                            <td>
+                                @if($ticket->assignee !== null)
+                                    <a href="{{ route('admin.users.edit', $ticket->assignee) }}">
+                                        {{ $ticket->assignee->name }}
+                                    </a>
+                                @else
+                                    {{ trans('messages.none') }}
+                                @endif
                             </td>
                             <td>
                                 <span class="badge bg-{{ $ticket->statusColor(true) }}">

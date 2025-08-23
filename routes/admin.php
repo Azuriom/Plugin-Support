@@ -16,6 +16,8 @@ Route::middleware('can:support.categories')->group(function () {
 Route::middleware('can:support.tickets')->group(function () {
     Route::post('/{ticket}/close', [TicketController::class, 'close'])->name('tickets.close');
     Route::post('/{ticket}/open', [TicketController::class, 'open'])->name('tickets.open');
+    Route::post('/{ticket}/assign', [TicketController::class, 'assign'])->name('tickets.assign');
+    Route::post('/{ticket}/unassign', [TicketController::class, 'unassign'])->name('tickets.unassign');
     Route::resource('tickets', TicketController::class)->except(['edit', 'create', 'store']);
 
     Route::resource('tickets.comments', TicketCommentController::class)->only(['store', 'update', 'destroy']);
