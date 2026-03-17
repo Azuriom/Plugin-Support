@@ -168,7 +168,7 @@ class Ticket extends Model
 
     public static function newTicketDelay(User $user): ?string
     {
-        $delay = setting('support.tickets_delay', 60);
+        $delay = (int) setting('support.tickets_delay', 60);
         $last = self::where('author_id', $user->id)
             ->where('created_at', '>', now()->subSeconds($delay))
             ->latest()

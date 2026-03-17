@@ -4,6 +4,7 @@ namespace Azuriom\Plugin\Support\Requests;
 
 use Azuriom\Plugin\Support\Models\Field;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Arr;
 use Illuminate\Validation\Rule;
 
 /**
@@ -27,7 +28,11 @@ class TicketRequest extends FormRequest
         $content = $this->category->fields
             ->filter(fn (Field $field) => $this->filled($field->inputName()))
             ->flatMap(fn (Field $field) => [
-                '## '.$field->name, '', $this->input($field->inputName()),
+                '## '.$field->name,
+                '',
+                $field->type !== 'checkbox'
+                    ? $this->input($field->inputName())
+                    : trans('messages.yes'),
             ])
             ->join("\n");
 
