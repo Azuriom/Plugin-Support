@@ -4,7 +4,6 @@ namespace Azuriom\Plugin\Support\Requests;
 
 use Azuriom\Plugin\Support\Models\Field;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Arr;
 use Illuminate\Validation\Rule;
 
 /**

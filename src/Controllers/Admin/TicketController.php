@@ -94,6 +94,12 @@ class TicketController extends Controller
         $ticket->assignee()->associate($request->user());
         $ticket->save();
 
+        if (($webhookUrl = setting('support.webhook')) !== null) {
+            $webhook = $ticket->createAssignedDiscordWebhook();
+
+            rescue(fn () => $webhook->send($webhookUrl));
+        }
+
         return to_route('support.admin.tickets.show', $ticket)
             ->with('success', trans('messages.status.success'));
     }

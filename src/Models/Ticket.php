@@ -133,7 +133,25 @@ class Ticket extends Model
         return $this->closed_at !== null;
     }
 
-    public function createCreatedDiscordWebhook(): DiscordWebhook
+    public function createAssignedDiscordWebhook(): DiscordWebhook
+    {
+        $assignee = $this->assignee !== null ? $this->assignee->name : trans('messages.none');
+
+        $embed = Embed::create()
+            ->title(trans('support::messages.webhook.assigned'))
+            ->author($this->author->name, null, $this->author->getAvatar())
+            ->addField(trans('messages.fields.title'), $this->subject)
+            ->addField(trans('messages.fields.category'), $this->category->name)
+            ->addField(trans('messages.fields.assignee'), $assignee)
+            ->url(route('support.admin.tickets.show', $this))
+            ->color('#004de6')
+            ->footer('Azuriom v'.Azuriom::version())
+            ->timestamp(now());
+
+        return DiscordWebhook::create()->addEmbed($embed);
+    }
+
+    public function createOpenedDiscordWebhook(): DiscordWebhook
     {
         $comment = $this->comments()->first();
 

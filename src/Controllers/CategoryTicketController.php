@@ -41,7 +41,7 @@ class CategoryTicketController extends Controller
         $comment->persistPendingAttachments($request->input('pending_id'));
 
         if (($webhookUrl = setting('support.webhook')) !== null) {
-            rescue(fn () => $ticket->createCreatedDiscordWebhook()->send($webhookUrl));
+            rescue(fn () => $ticket->createOpenedDiscordWebhook()->send($webhookUrl));
         }
 
         return to_route('support.tickets.show', $ticket);
